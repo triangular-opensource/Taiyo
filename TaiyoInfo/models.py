@@ -43,6 +43,7 @@ class GenralInfo(models.Model):
         return self.title
 
 
+
 class NewsLetter(models.Model):
     email = models.EmailField(max_length=50)
     generation_time = models.DateTimeField(auto_now=True)
