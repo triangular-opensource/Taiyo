@@ -28,6 +28,6 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
 
-# admin.site.site_header = "TRACERZ"
-# admin.site.site_title = "TRACERZ"
-# admin.AdminSite.index_title = "Tracerz Administration"
+admin.site.site_header = "Taiyo"
+admin.site.site_title = "Taiyo"
+admin.AdminSite.index_title = "Taiyo"

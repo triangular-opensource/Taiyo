@@ -40,7 +40,7 @@ class GenralInfo(models.Model):
     policies = models.OneToOneField(Policy, on_delete=models.CASCADE)
     models.TextField(blank=True)
     def __str__(self):
-        return self.title
+        return self.name
 
 
 
