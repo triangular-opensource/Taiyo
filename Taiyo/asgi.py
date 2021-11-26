@@ -1,5 +1,5 @@
 """
-ASGI config for apexMarketing project.
+ASGI config for Taiyo project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'apexMarketing.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Taiyo.settings')
 
 application = get_asgi_application()
