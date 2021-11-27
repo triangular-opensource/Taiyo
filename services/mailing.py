@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.core.mail import send_mail
 
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 def send_email(subject, message, to):
     return
@@ -15,3 +17,14 @@ def send_email(subject, message, to):
         connection=None,
         html_message=None
     )
+
+def newslettersendmail():
+    msg_html = render_to_string('templates/email.html')
+    send_mail(
+        'email title',
+        msg_html,
+        'some@sender.com',
+        ['some@receiver.com'],
+        html_message=msg_html,
+    )
+
