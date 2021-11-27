@@ -36,11 +36,7 @@ def not_found_response(payload):
 
 
 def custom_exception_handler(exc, context):
-    # Call REST framework's default exception handler first,
-    # to get the standard error response.
     response = exception_handler(exc, context)
-
-    # Now add the HTTP status code to the response.
     if response is not None:
         return error_response(response.data, response.status_code)
 

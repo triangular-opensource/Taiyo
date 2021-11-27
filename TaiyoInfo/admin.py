@@ -1,12 +1,7 @@
 from django.contrib import admin
 
-from .models import GenralInfo, Addres, Policy, NewsLetter
+from .models import Addres, Policy, NewsLetter
 
-@admin.register(GenralInfo)
-class GeneralInfoAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'contact']
-    list_display_links = ['name']
- 
 
 
 

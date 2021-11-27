@@ -1,8 +1,12 @@
 from django.conf import settings
 from django.core.mail import send_mail
 
+
+
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+
+
 
 def send_email(subject, message, to):
     return
@@ -18,8 +22,10 @@ def send_email(subject, message, to):
         html_message=None
     )
 
-def newslettersendmail():
-    msg_html = render_to_string('templates/email.html')
+
+
+def sendNewsEmail(newsList):
+    msg_html = render_to_string('templates/email.html', {'some_params': newsList})
     send_mail(
         'email title',
         msg_html,
