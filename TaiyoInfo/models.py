@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
-from datetime import datetime
+
+from services.validators import validate_copyright, validate_email_id, validate_phone_number, validate_pincode
 
 
 class Addres(models.Model):
@@ -8,7 +9,7 @@ class Addres(models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
-    pincode = models.CharField(max_length=6)
+    pincode = models.CharField(max_length=6, validators=[validate_pincode])
 
     def __str__(self):
         return self.address + " " + self.city + " " + self.state + " " + self.country + " " + self.pincode
@@ -28,24 +29,23 @@ class GenralInfo(models.Model):
     cover_image = models.URLField(max_length=200, null=True, blank=True)
     intro = models.TextField(blank=True)
     about = models.TextField(blank=True)
-    email = models.EmailField(max_length=50, default='')
-    contact = models.CharField(max_length=10, default='')
+    email = models.EmailField(max_length=50, null=True, validators=[validate_email_id])
+    contact = models.CharField(max_length=10, null=True, validators=[validate_phone_number])
     twitter = models.URLField(max_length=200, null=True, blank=True)
     linked_in = models.URLField(max_length=200, null=True, blank=True)
     facebook = models.URLField(max_length=200, null=True, blank=True)
     android_store = models.URLField(max_length=200, null=True, blank=True)
     apple_store = models.URLField(max_length=200, null=True, blank=True)
-    copyright = models.CharField(max_length=4)
+    copyright = models.CharField(max_length=4, validators=[validate_copyright])
     address = models.OneToOneField(Addres, on_delete=models.CASCADE)
     policies = models.OneToOneField(Policy, on_delete=models.CASCADE)
-    models.TextField(blank=True)
+
     def __str__(self):
         return self.name
-
-
+        
 
 class NewsLetter(models.Model):
-    email = models.EmailField(max_length=50)
+    email = models.EmailField(max_length=50, validators=[validate_email_id])
     generation_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
