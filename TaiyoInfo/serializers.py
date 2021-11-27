@@ -1,9 +1,9 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 
 from TaiyoInfo.models import GeneralInfo
 
 
-class GeneralInfoSerializer(ModelSerializer):
+class GeneralInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = GeneralInfo
         fields = "__all__"
