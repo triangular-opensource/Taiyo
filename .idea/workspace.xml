@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c997182-cf57-462f-bc6e-8c966aecb535" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Taiyo/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Taiyo/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Taiyo/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="119" selection-start-line="119" selection-end-line="119" />
+            <state relative-caret-position="222">
+              <caret line="160" column="25" selection-start-line="160" selection-start-column="25" selection-end-line="160" selection-end-column="25" />
               <folding>
                 <element signature="e#305#325#0" expanded="true" />
               </folding>
@@ -75,8 +74,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TaiyoInfo/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="860">
-              <caret line="43" selection-start-line="43" selection-end-line="43" />
+            <state relative-caret-position="320">
+              <caret line="40" column="3" selection-start-line="40" selection-start-column="3" selection-end-line="40" selection-end-column="32" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -149,6 +148,11 @@
               <item name="Taiyo" type="462c0819:PsiDirectoryNode" />
               <item name="Taiyo" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Taiyo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Taiyo" type="462c0819:PsiDirectoryNode" />
+              <item name="TaiyoInfo" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -194,7 +198,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21532364" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15521796" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
@@ -250,16 +254,6 @@
     <entry file="file://$PROJECT_DIR$/TaiyoInfo/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/TaiyoInfo/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="860">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TaiyoInfo/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -284,10 +278,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/TaiyoInfo/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="40" column="3" selection-start-line="40" selection-start-column="3" selection-end-line="40" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Taiyo/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="119" selection-start-line="119" selection-end-line="119" />
+        <state relative-caret-position="222">
+          <caret line="160" column="25" selection-start-line="160" selection-start-column="25" selection-end-line="160" selection-end-column="25" />
           <folding>
             <element signature="e#305#325#0" expanded="true" />
           </folding>
