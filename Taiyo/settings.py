@@ -25,9 +25,31 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DEBUG'))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-# Application definition
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'access-control-request-headers',
+    'authorization',
+    'content-type',
+    'host',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'PATCH',
+    'OPTIONS'
+    'POST',
+    'PUT',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -38,6 +60,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'ckeditor',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
 
     'TaiyoInfo'
 ]
@@ -128,6 +153,16 @@ MEDIA_ROOT = [BASE_DIR / "media"]
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATIC_URL = '/static/'
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "taiyo.apex@gmail.com"
+EMAIL_HOST_PASSWORD = "Gj@19bg9846"
 
 
 django_heroku.settings(locals())
