@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
 
-    'TaiyoInfo'
+    'TaiyoInfo.apps.TaiyoinfoConfig'
 ]
 
 MIDDLEWARE = [
