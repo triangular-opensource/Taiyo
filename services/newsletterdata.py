@@ -8,7 +8,7 @@ def generateNewsData():
            'sortBy=popularity&'
            'apiKey=b69886d32bdd4beab5b74b3385ac7dbc')
     response = requests.get(url)
-    return response
+    return response.json()
 
 
 
