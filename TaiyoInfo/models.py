@@ -23,7 +23,7 @@ class Policy(models.Model):
         return "Company policies"
 
 
-class GenralInfo(models.Model):
+class GeneralInfo(models.Model):
     name = models.CharField(max_length=50)
     icon = models.URLField(max_length=200)
     cover_image = models.URLField(max_length=200, null=True, blank=True)
