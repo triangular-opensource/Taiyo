@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
-from TaiyoInfo.models import GeneralInfo
+from TaiyoInfo.models import GeneralInfo, Addres, NewsLetter , Policy
+
+
 
 
 class GeneralInfoSerializer(serializers.ModelSerializer):
@@ -10,16 +12,18 @@ class GeneralInfoSerializer(serializers.ModelSerializer):
 
 class NewsLetterSerializer(serializers.ModelSerializer):
     class Meta:
-        model = GeneralInfo
+        model = NewsLetter
         fields = "__all__"
 
 class PolicySerializer(serializers.ModelSerializer):
     class Meta:
-        model = GeneralInfo
+        model = Policy
         fields = "__all__"
 
 class AddresSerializer(serializers.ModelSerializer):
     class Meta:
-        model = GeneralInfo
+        model = Addres
         fields = "__all__"
+
+        fields = ['generalInfo','address','policy']
 
