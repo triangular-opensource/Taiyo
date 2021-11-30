@@ -25,5 +25,3 @@ class AddresSerializer(serializers.ModelSerializer):
         model = Addres
         fields = "__all__"
 
-        fields = ['generalInfo','address','policy']
-
