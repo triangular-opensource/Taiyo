@@ -37,8 +37,7 @@ class GeneralInfo(models.Model):
     android_store = models.URLField(max_length=200, null=True, blank=True)
     apple_store = models.URLField(max_length=200, null=True, blank=True)
     copyright = models.CharField(max_length=4, validators=[validate_copyright])
-    address = models.OneToOneField(Addres, on_delete=models.CASCADE)
-    policies = models.OneToOneField(Policy, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.name
