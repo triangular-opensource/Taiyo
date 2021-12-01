@@ -25,12 +25,6 @@ class GeneralInfoAdmin(admin.ModelAdmin):
             'fields': (
                 'android_store', 'apple_store',)
         }),
-        ('Address', {
-            'fields': ('address',)
-        }),
-        ('Terms & Conditions And Privacy Policies', {
-            'fields': ('policies',)
-        })
     )
 
     def has_add_permission(self, request):
