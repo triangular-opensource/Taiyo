@@ -6,7 +6,7 @@ import six
 
 def create_token(username, password):
     user = auth.authenticate(username=username, password=password)
-    if user and user.is_verified:
+    if user and user.is_active:
         token, _ = Token.objects.get_or_create(user=user)
         return token
     return "Your email isn't verified! Please verify than try to login."

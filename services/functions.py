@@ -23,7 +23,7 @@ def send_activation_email(user, request):
     email = EmailMessage(
         subject=subject,
         body=body,
-        from_email=settings.EMAIL_FROM_USER,
+        from_email=settings.EMAIL_HOST_USER,
         to=[user.email]
     )
 

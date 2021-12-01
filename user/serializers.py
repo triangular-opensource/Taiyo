@@ -6,7 +6,7 @@ import re
 class RegisterSerializer(serializers.Serializer):
 
     first_name = serializers.CharField(required=True, max_length=75)
-    middle_name = serializers.charField(max_length=True)
+    middle_name = serializers.CharField(required=False, max_length=30)
     last_name = serializers.CharField(max_length=75)
     username = serializers.CharField(required=True, max_length=75)
     gst_number = serializers.CharField(required= True,max_length=16)
