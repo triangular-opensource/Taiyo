@@ -1,18 +1,17 @@
 from django.contrib.auth import get_user_model
-from django.shortcuts import get_object_or_404, redirect, render
-from django.utils.encoding import force_text
-from django.utils.http import urlsafe_base64_decode
+from django.shortcuts import get_object_or_404
+
 
 from rest_framework import generics
-from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import permission_classes
-from user.serializers import RegisterSerializer
 
-from users.serializers import *
+from services.functions import send_activation_email
+from user.serializers import *
 from services.response import *
 from services.utility import *
 from .models import *
+from rest_framework import status
 
 User = get_user_model()
 generate_token = EmaiLVerIficationTokenGenerator()
@@ -56,6 +55,36 @@ class LoginAPIView(generics.CreateAPIView):
         return bad_request_response({'Message': "Invalid Username or Password!"})
 
 
+@permission_classes((IsAuthenticated,))
+class ChangePasswordView(generics.UpdateAPIView):
+    serializer_class = ChangePasswordSerializer
+    def update(self, request, *args, **kwargs):
+        self.object = self.request.user
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            if not self.object.check_password(serializer.data.get("old_password")):
+                return create_response({"message": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
+            self.object.set_password(serializer.data.get("new_password"))
+            self.object.save()
+            return create_response({"message": 'success'} , status = status.HTTP_200_OK)
+        return create_response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+
+
+
+
+@permission_classes((AllowAny,))
+class resetPasswordView(generics.CreateAPIView):
+    serializer_class = resetPasswordSerializer
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        if not serializer.is_valid():
+            return bad_request_response({"message": "email not valid"} , status = status.HTTP_400_BAD_REQUEST)
+        obj = User.objects.filter(email=request.data["email"])
+        if obj:
+            #TODO : alankar write that email verification function
+
+            return create_response({"mesage": 'email sent'} , status = status.HTTP_200_OK)
+        return bad_request_response({'Message': "Email not sent account not exsist"} , status = status.HTTP_400_BAD_REQUEST)
 
