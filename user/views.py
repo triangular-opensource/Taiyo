@@ -1,3 +1,6 @@
+import math
+import random
+
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 
@@ -10,6 +13,7 @@ from django.utils.http import urlsafe_base64_decode
 from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import permission_classes
+from services.mailing import send_email
 
 from user.serializers import *
 from services.functions import send_activation_email
@@ -53,39 +57,74 @@ class LoginAPIView(generics.CreateAPIView):
         if request.data["email"] is not None or request.data['email'] != "":
             user = get_object_or_404(User, email=request.data["email"])
             token = create_token(username=user.username, password=request.data['password'])
-        if token:
-            return create_response({'token': token.key})
-        return bad_request_response({'Message': "Invalid Username or Password!"})
+            if token:
+                return create_response({'token': token.key})
+            elif not user.is_active:
+                return bad_request_response({"message": "Your email isn't verified! Please verify than try to login."})
+            else:
+                return bad_request_response({"message": "Invalid Username/Password"})
 
 
 @permission_classes((IsAuthenticated,))
 class ChangePasswordView(generics.UpdateAPIView):
     serializer_class = ChangePasswordSerializer
     def update(self, request, *args, **kwargs):
-        self.object = self.request.user
+        user = request.user
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            if not self.object.check_password(serializer.data.get("old_password")):
-                return create_response({"message": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
-            self.object.set_password(serializer.data.get("new_password"))
-            self.object.save()
-            return create_response({"message": 'success'} , status = status.HTTP_200_OK)
-        return create_response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+            if not user.check_password(serializer.data.get("old_password")):
+                return bad_request_response({"message": ["Wrong password."]})
+            user.set_password(serializer.data.get("new_password"))
+            user.save()
+            return create_response({"message": 'success'})
+        return bad_request_response(serializer.errors)
 
 @permission_classes((AllowAny,))
-class ResetPasswordView(generics.CreateAPIView):
-    serializer_class = resetPasswordSerializer
+class ResetPasswordTokenView(generics.CreateAPIView):
+    serializer_class = ResetPasswordSerializer
+
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         if not serializer.is_valid():
-            return bad_request_response({"message": "email not valid"} , status = status.HTTP_400_BAD_REQUEST)
-        obj = User.objects.filter(email=request.data["email"])
+            return bad_request_response(serializer.errors)
+        obj = User.objects.filter(username=request.data["email"])
         if obj:
-            #TODO : alankar write that email verification function
+            digits = [i for i in range(0, 10)]
+            token = ""
+            for _ in range(6):
+                index = math.floor(random.random() * 10)
+                token += str(digits[index])
+            if token:
+                send_email(
+                        subject="Your Reset Token of Taiyo",
+                        message=token,
+                        to=request.data['email']
+                )
+                Token.objects.create(token=token, email=request.data["email"])
+                return create_response({'message': 'email sent'})
+            return bad_request_response({'Message': "Invalid Username or Password!"})
+        else:
+            return bad_request_response({'Message': "Email not sent 2"})
 
-            return create_response({"mesage": 'email sent'} , status = status.HTTP_200_OK)
-        return bad_request_response({'Message': "Email not sent account not exsist"} , status = status.HTTP_400_BAD_REQUEST)
+
+@permission_classes((AllowAny,))
+class RPTChangeView(generics.CreateAPIView):
+    serializer_class = ResetPasswordTokenSerializer
+
+    def post(self, request, email, *args, **kwargs):
+        obj = Token.objects.filter(email=email).last()
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            if obj.token == request.data["token"]:
+                user = User.objects.get(email=email)
+                user.set_password(request.data["password"])
+                user.save()
+                Token.objects.filter(email=email).delete()
+                return create_response({'status': 'success'})
+            return bad_request_response(serializer.errors)
+        return bad_request_response({'Message': "failure"})
+
+
 
 
 def activate_user(request, uidb64, token):

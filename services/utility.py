@@ -9,7 +9,7 @@ def create_token(username, password):
     if user and user.is_active:
         token, _ = Token.objects.get_or_create(user=user)
         return token
-    return "Your email isn't verified! Please verify than try to login."
+    return None
 
 
 class EmaiLVerIficationTokenGenerator(PasswordResetTokenGenerator):

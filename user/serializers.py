@@ -68,7 +68,21 @@ class ChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
 
-class resetPasswordSerializer(serializers.Serializer):
+    class Meta:
+        fields = ['old_password', 'new_password']
+
+
+class ResetPasswordTokenSerializer(serializers.Serializer):
+    token = serializers.CharField(required=True)
+    password = serializers.CharField(required=True)
+
+    class Meta:
+        fields = ['token', 'password']
+
+class ResetPasswordSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
+
+    class Meta:
+        fields = ['email']
 
 
