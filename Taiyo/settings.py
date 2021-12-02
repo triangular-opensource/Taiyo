@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'TaiyoInfo.apps.TaiyoinfoConfig'
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
