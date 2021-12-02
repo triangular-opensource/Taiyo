@@ -67,7 +67,8 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'TaiyoInfo.apps.TaiyoinfoConfig',
-    'user'
+    'user',
+    'Ads',
 ]
 
 MIDDLEWARE = [
