@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import GeneralInfo, Addres, Policy, NewsLetter
+from .models import GeneralInfo, Addres, Policy, NewsLetter , Category , Product
 
 @admin.register(GeneralInfo)
 class GeneralInfoAdmin(admin.ModelAdmin):
@@ -51,3 +51,7 @@ class PolicyAdmin(admin.ModelAdmin):
 class NewsLetterAdmin(admin.ModelAdmin):
     list_display = ['id', 'email', 'generation_time']
     list_display_links = ['id', 'email']
+
+
+admin.site.register(Category)
+admin.site.register(Product)
