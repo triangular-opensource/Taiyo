@@ -1,8 +1,7 @@
 from rest_framework import serializers
 
-from TaiyoInfo.models import GeneralInfo, Addres, NewsLetter , Policy
-
-
+from TaiyoInfo.models import Category, GeneralInfo, Addres, NewsLetter , Policy, Product
+from services.serializers import ForeignKeyField
 
 
 class GeneralInfoSerializer(serializers.ModelSerializer):
@@ -25,3 +24,15 @@ class AddresSerializer(serializers.ModelSerializer):
         model = Addres
         fields = "__all__"
 
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = "__all__"
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    category = ForeignKeyField(queryset=Category.objects, filter_by="name")
+    class Meta:
+        model = Product
+        fields = ["__all__"]

@@ -51,10 +51,6 @@ class NewsLetter(models.Model):
         return self.email
 
 
-
-
-
-
 class Category(models.Model):
     name = models.CharField(max_length=20)
 

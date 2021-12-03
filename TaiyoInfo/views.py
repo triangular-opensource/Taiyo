@@ -1,13 +1,13 @@
 from rest_framework import generics
 from rest_framework.views import APIView
 
-from TaiyoInfo.serializers import GeneralInfoSerializer, PolicySerializer, AddresSerializer, NewsLetterSerializer
+from TaiyoInfo.serializers import CategorySerializer, GeneralInfoSerializer, PolicySerializer, AddresSerializer, NewsLetterSerializer, ProductSerializer
 from services.mailing import sendNewsEmail
 
 from services.response import success_response, bad_request_response, empty_response, create_response, not_found_response
 
 
-from TaiyoInfo.models import GeneralInfo, NewsLetter, Addres , Policy
+from TaiyoInfo.models import Category, GeneralInfo, NewsLetter, Addres , Policy, Product
 
 
 
@@ -32,17 +32,24 @@ class AddressView(generics.RetrieveAPIView):
         return success_response(serializer.data)
 
 
-class NewsLetterView(generics.RetrieveAPIView):
+class NewsLetterView(generics.RetrieveAPIView, generics.CreateAPIView):
     serializer_class = NewsLetterSerializer
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(NewsLetter.objects.all(), many=True)
         return success_response(serializer.data)
 
 
+class CategoryView(generics.RetrieveAPIView):
+    serializer_class = CategorySerializer
+
+    def get(self, request, *args, **kwargs):
+        serializer = self.get_serializer(Category.objects.aa(), many=True)
+        return success_response(serializer.data)
 
 
+class ProductView(generics.RetrieveAPIView):
+    serializer_class = ProductSerializer
 
-
-
-
-
+    def get(self, request, *args, **kwargs):
+        serializer = self.get_serializer(Product.objects.aa(), many=True)
+        return success_response(serializer.data)

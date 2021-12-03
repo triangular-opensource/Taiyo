@@ -1,13 +1,11 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 
 from services.constant import AD_QUALITY, AD_TEMPER,  BUY_OR_SELL
 from TaiyoInfo.models import Product
-from django.contrib.auth import get_user_model
 
 User = get_user_model()
-
-
 
 
 class Advertisement(models.Model):
@@ -32,7 +30,6 @@ class Advertisement(models.Model):
     author_contry = models.CharField(max_length=20)
     author_buisness_address = models.CharField(max_length=100)
 
-
     @property
     def category(self):
         return self.product.category
@@ -41,15 +38,12 @@ class Advertisement(models.Model):
         return self.product.name
 
 
-
-
 class AdImages(models.Model):
     image = models.URLField(max_length=300, null=True, blank=True)
     advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, null=True)
+    
     def __str__(self):
         return self.image
-
-
 
 
 class Bid(models.Model):
@@ -57,6 +51,7 @@ class Bid(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, null=True)
     selected = models.BooleanField(default=False)
+    
     def __str__(self):
         return str(self.amount) +" "+ self.user.username
 
