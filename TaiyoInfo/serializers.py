@@ -14,7 +14,7 @@ class NewsLetterSerializer(serializers.ModelSerializer):
     class Meta:
         model = NewsLetter
         fields = "__all__"
-        readonly_fields = ['generation_time']
+        read_only_fields = ['generation_time']
 
 class PolicySerializer(serializers.ModelSerializer):
     class Meta:
