@@ -1,5 +1,7 @@
-from rest_framework import generics
+from rest_framework import generics, serializers
+from rest_framework.decorators import permission_classes
 from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 
 from TaiyoInfo.serializers import GeneralInfoSerializer, PolicySerializer, AddresSerializer, NewsLetterSerializer
 from services.mailing import sendNewsEmail
@@ -32,11 +34,20 @@ class AddressView(generics.RetrieveAPIView):
         return success_response(serializer.data)
 
 
+@permission_classes((AllowAny, ))
 class NewsLetterView(generics.RetrieveAPIView):
     serializer_class = NewsLetterSerializer
+    
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(NewsLetter.objects.all(), many=True)
         return success_response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return success_response(serializer.data)
+        return bad_request_response(serializer.errors)
 
 
 
