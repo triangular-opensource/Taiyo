@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import GeneralInfo, Addres, Policy, NewsLetter , Category , Product
+from .models import GeneralInfo, Addres, Policy, NewsLetter , Category , Product , Subscription
 
 @admin.register(GeneralInfo)
 class GeneralInfoAdmin(admin.ModelAdmin):
@@ -55,3 +55,4 @@ class NewsLetterAdmin(admin.ModelAdmin):
 
 admin.site.register(Category)
 admin.site.register(Product)
+admin.site.register(Subscription)

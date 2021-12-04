@@ -2,13 +2,13 @@ from rest_framework import generics
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 
-from TaiyoInfo.serializers import CategorySerializer, GeneralInfoSerializer, PolicySerializer, AddresSerializer, NewsLetterSerializer, ProductSerializer
+from TaiyoInfo.serializers import CategorySerializer, GeneralInfoSerializer, PolicySerializer, AddresSerializer, NewsLetterSerializer, ProductSerializer , SubscriptionSerializer
 
 
 from services.response import success_response, bad_request_response
 
 
-from TaiyoInfo.models import Category, GeneralInfo, NewsLetter, Addres , Policy, Product
+from TaiyoInfo.models import Category, GeneralInfo, NewsLetter, Addres , Policy, Product , Subscription
 
 
 
@@ -68,4 +68,14 @@ class ProductView(generics.RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(Product.objects.aa(), many=True)
+        return success_response(serializer.data)
+
+
+
+
+@permission_classes((AllowAny, ))
+class SubscriptionView(generics.RetrieveAPIView):
+    serializer_class = SubscriptionSerializer
+    def get(self, request, *args, **kwargs):
+        serializer = self.get_serializer(Subscription.objects.aa(), many=True)
         return success_response(serializer.data)
