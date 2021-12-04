@@ -1,12 +1,11 @@
-from rest_framework import generics, serializers
+from rest_framework import generics
 from rest_framework.decorators import permission_classes
-from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 
 from TaiyoInfo.serializers import CategorySerializer, GeneralInfoSerializer, PolicySerializer, AddresSerializer, NewsLetterSerializer, ProductSerializer
-from services.mailing import sendNewsEmail
 
-from services.response import success_response, bad_request_response, empty_response, create_response, not_found_response
+
+from services.response import success_response, bad_request_response
 
 
 from TaiyoInfo.models import Category, GeneralInfo, NewsLetter, Addres , Policy, Product
