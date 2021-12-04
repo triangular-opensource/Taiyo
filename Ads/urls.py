@@ -3,7 +3,6 @@ from django.urls import path
 from Ads.views import *
 
 
-
 urlpatterns = [
     path("advertisement", AdvertismentView.as_view(), name="advertisement"),
     path("advertisement/<int:id>", AdvertismentChanges.as_view(), name="advertisement"),
