@@ -54,6 +54,7 @@ CORS_ALLOW_METHODS = [
 ]
 
 INSTALLED_APPS = [
+    'TaiyoInfo.apps.SuitConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
