@@ -5,8 +5,7 @@ from services.newsletterdata import generateNewsData
 
 
 def send_email(subject, message, to):
-    return
-    send_mail(
+    return send_mail(
         subject=subject,
         message=message,
         from_email=settings.EMAIL_HOST_USER,

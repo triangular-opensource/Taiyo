@@ -3,13 +3,13 @@ from rest_framework.decorators import permission_classes
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 
-from TaiyoInfo.serializers import GeneralInfoSerializer, PolicySerializer, AddresSerializer, NewsLetterSerializer
+from TaiyoInfo.serializers import CategorySerializer, GeneralInfoSerializer, PolicySerializer, AddresSerializer, NewsLetterSerializer, ProductSerializer
 from services.mailing import sendNewsEmail
 
 from services.response import success_response, bad_request_response, empty_response, create_response, not_found_response
 
 
-from TaiyoInfo.models import GeneralInfo, NewsLetter, Addres , Policy
+from TaiyoInfo.models import Category, GeneralInfo, NewsLetter, Addres , Policy, Product
 
 
 
@@ -35,7 +35,8 @@ class AddressView(generics.RetrieveAPIView):
 
 
 @permission_classes((AllowAny, ))
-class NewsLetterView(generics.RetrieveAPIView):
+class NewsLetterView(generics.RetrieveAPIView, generics.CreateAPIView):
+
     serializer_class = NewsLetterSerializer
     
     def get(self, request, *args, **kwargs):
@@ -50,10 +51,17 @@ class NewsLetterView(generics.RetrieveAPIView):
         return bad_request_response(serializer.errors)
 
 
+class CategoryView(generics.RetrieveAPIView):
+    serializer_class = CategorySerializer
+
+    def get(self, request, *args, **kwargs):
+        serializer = self.get_serializer(Category.objects.aa(), many=True)
+        return success_response(serializer.data)
 
 
+class ProductView(generics.RetrieveAPIView):
+    serializer_class = ProductSerializer
 
-
-
-
-
+    def get(self, request, *args, **kwargs):
+        serializer = self.get_serializer(Product.objects.aa(), many=True)
+        return success_response(serializer.data)

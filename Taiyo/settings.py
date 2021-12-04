@@ -29,6 +29,8 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+AUTH_USER_MODEL = "user.User"
+
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
@@ -64,7 +66,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
 
-    'TaiyoInfo.apps.TaiyoinfoConfig'
+    'TaiyoInfo.apps.TaiyoinfoConfig',
+    'user',
+    'Ads',
 ]
 
 
@@ -128,6 +132,13 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.TokenAuthentication',),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+    'EXCEPTION_HANDLER': 'services.response.custom_exception_handler'
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
