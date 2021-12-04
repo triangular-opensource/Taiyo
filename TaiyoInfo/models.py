@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import mark_safe
 from ckeditor.fields import RichTextField
 
 from services.validators import validate_copyright, validate_email_id, validate_phone_number, validate_pincode
@@ -38,6 +39,18 @@ class GeneralInfo(models.Model):
     apple_store = models.URLField(max_length=200, null=True, blank=True)
     copyright = models.CharField(max_length=4, validators=[validate_copyright])
 
+    def icon_tag(self):
+        if self.icon:
+            return mark_safe(f'<img src="{self.icon}" width="auto" height="150px" />')
+        return "No icon selected!"
+    
+    def cover_tag(self):
+        if self.cover_image:
+            return mark_safe(f'<img src="{self.cover_image}" width="auto" height="150" />')
+        return "No cover image selected!"
+
+    icon_tag.short_description = 'Icon Preview'
+    cover_tag.short_description = 'Cover Preview'
 
     def __str__(self):
         return self.name

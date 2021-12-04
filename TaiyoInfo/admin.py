@@ -11,7 +11,7 @@ class GeneralInfoAdmin(admin.ModelAdmin):
             'fields': ('name', 'email', 'contact', 'copyright',)
         }),
         ('Images', {
-            'fields': ('icon', 'cover_image',)
+            'fields': ('icon', 'icon_tag', 'cover_image','cover_tag')
         }),
         ('About', {
             'fields': (
@@ -26,6 +26,7 @@ class GeneralInfoAdmin(admin.ModelAdmin):
                 'android_store', 'apple_store',)
         }),
     )
+    readonly_fields = ['icon_tag', 'cover_tag']
 
     def has_add_permission(self, request):
         return False if self.model.objects.count() > 0 else super().has_add_permission(request)
