@@ -24,6 +24,7 @@ from user.views import activate_user
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/", include("TaiyoInfo.urls")),
+    path("api/", include("Ads.urls")),
     path("api/auth/", include("user.urls")),
     path('activate-user/<uidb64>/<token>', activate_user, name="activate"),
 ]
