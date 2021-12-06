@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from TaiyoInfo.models import Category, GeneralInfo, Addres, NewsLetter , Policy, Product , Subscription
+from TaiyoInfo.models import Category, GeneralInfo, Addres, NewsLetter , Policy, Product , Subscription , Contact
 from services.serializers import ForeignKeyField
 
 
@@ -41,8 +41,14 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = ["__all__"]
+
+
 
 class SubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Category
+        model = Subscription
         fields = "__all__"

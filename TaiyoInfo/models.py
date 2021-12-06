@@ -72,3 +72,12 @@ class Subscription(models.Model):
     days = models.CharField(max_length=100)
     def __str__(self):
         return self.amount
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField(max_length=50, validators=[validate_email_id])
+    subject = models.CharField(max_length=50)
+    message = models.TextField(blank=True)
+    def __str__(self):
+        return self.name

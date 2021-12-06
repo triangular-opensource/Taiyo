@@ -19,7 +19,7 @@ def send_email(subject, message, to):
 
 
 
-def sendNewsEmail():
+def sendNewsEmail(email):
     response = generateNewsData()
     print(response)
     msg_html = render_to_string('email/email.html', {'data': response})
@@ -27,7 +27,21 @@ def sendNewsEmail():
         'Taiyo : NewsLetter',
         msg_html,
         "taiyo.apex@gmail.com",
-        ['svgcarol@gmail.com'],
+        [email],
         html_message=msg_html,
     )
+
+
+
+
+def sendContactEmail():
+    msg_html = render_to_string('email/contact.html', {'data': response})
+    send_mail(
+        'Taiyo : SomeOne Wants To  COntact',
+        msg_html,
+        "taiyo.apex@gmail.com",
+        ['taiyo.apex@gmail.com'],
+        html_message=msg_html,
+    )
+
 

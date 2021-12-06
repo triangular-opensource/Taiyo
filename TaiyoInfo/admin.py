@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import GeneralInfo, Addres, Policy, NewsLetter , Category , Product , Subscription
+from .models import GeneralInfo, Addres, Policy, NewsLetter , Category , Product , Subscription , Contact
 
 @admin.register(GeneralInfo)
 class GeneralInfoAdmin(admin.ModelAdmin):
@@ -56,3 +56,10 @@ class NewsLetterAdmin(admin.ModelAdmin):
 admin.site.register(Category)
 admin.site.register(Product)
 admin.site.register(Subscription)
+
+
+
+@admin.register(Contact)
+class Constactdmin(admin.ModelAdmin):
+    list_display = ['id', 'name','email' , 'subject','generation_time']
+    list_display_links = ['id', 'name' , 'email' , 'subject']
