@@ -8,5 +8,5 @@ urlpatterns = [
     path("policy", PolicyView.as_view(), name="policy"),
     path("news-letter", NewsLetterView.as_view(), name="news-letter"),
     path("subscription", NewsLetterView.as_view(), name="subscription"),
-    path("contact", ContactView.as_view(), name="subscription")
+    path("contact", ContactView.as_view(), name="contact")
 ]

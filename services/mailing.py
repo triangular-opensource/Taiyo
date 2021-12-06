@@ -34,7 +34,7 @@ def sendNewsEmail(email):
 
 
 
-def sendContactEmail():
+def sendContactEmail(response):
     msg_html = render_to_string('email/contact.html', {'data': response})
     send_mail(
         'Taiyo : SomeOne Wants To  COntact',

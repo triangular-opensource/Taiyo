@@ -9,7 +9,7 @@ from services.response import success_response, bad_request_response
 from services.mailing import *
 
 
-from TaiyoInfo.models import Category, GeneralInfo, NewsLetter, Addres , Policy, Product , Subscription
+from TaiyoInfo.models import Category, GeneralInfo, NewsLetter, Addres , Policy, Product , Subscription , Contact
 
 
 
@@ -57,7 +57,7 @@ class CategoryView(generics.RetrieveAPIView):
     serializer_class = CategorySerializer
 
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Category.objects.aa(), many=True)
+        serializer = self.get_serializer(Category.objects.all(), many=True)
         return success_response(serializer.data)
 
 
@@ -65,7 +65,7 @@ class CategoryView(generics.RetrieveAPIView):
 class ProductView(generics.RetrieveAPIView):
     serializer_class = ProductSerializer
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Product.objects.aa(), many=True)
+        serializer = self.get_serializer(Product.objects.all(), many=True)
         return success_response(serializer.data)
 
 
@@ -79,13 +79,25 @@ class SubscriptionView(generics.RetrieveAPIView):
         return success_response(serializer.data)
 
 
+
+
 @permission_classes((AllowAny,))
 class ContactView(generics.RetrieveAPIView, generics.CreateAPIView):
     serializer_class = ContactSerializer
+    def get(self, request, *args, **kwargs):
+        serializer = self.get_serializer(Contact.objects.all(), many=True)
+        return success_response(serializer.data)
+
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            sendContactEmail(request.data['email'])
+            data = {
+                "name": request.data["name"],
+                "email" : request.data["email"],
+                "subject" : request.data["subject"],
+                "message" : request.data["message"]
+            }
+            sendContactEmail(data)
             return success_response(serializer.data)
         return bad_request_response(serializer.errors)

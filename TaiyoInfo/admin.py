@@ -62,5 +62,5 @@ admin.site.register(Subscription)
 
 @admin.register(Contact)
 class Constactdmin(admin.ModelAdmin):
-    list_display = ['id', 'name','email' , 'subject','generation_time']
+    list_display = ['id', 'name','email' , 'subject']
     list_display_links = ['id', 'name' , 'email' , 'subject']

@@ -13,7 +13,7 @@ class NewsLetterSerializer(serializers.ModelSerializer):
     class Meta:
         model = NewsLetter
         fields = "__all__"
-        read_only_fields = ['generation_time']
+        read_only_fields = 'generation_time'
 
 class PolicySerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,7 +36,7 @@ class ProductSerializer(serializers.ModelSerializer):
     category = ForeignKeyField(queryset=Category.objects, filter_by="name")
     class Meta:
         model = Product
-        fields = ["__all__"]
+        fields = "__all__"
 
 
 
@@ -44,7 +44,7 @@ class ProductSerializer(serializers.ModelSerializer):
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
-        fields = ["__all__"]
+        fields = "__all__"
 
 
 
