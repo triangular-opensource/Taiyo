@@ -57,21 +57,24 @@ class BidView(generics.RetrieveAPIView):
 
 class BidChanges(generics.ListAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
     serializer_class =  BidSerializer
-
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Bid.objects.get(id=kwargs['id']))
+        serializer = self.get_serializer(Bid.objects.filter( advertisement =kwargs['id']) , many = True)
         return success_response(serializer.data)
 
     def put(self, request, *args, **kwargs):
-        instance = generics.get_object_or_404( BidSerializer, id=kwargs['id'])
-        serializer = self.get_serializer(instance=instance, data=request.data)
+        try:
+            bid = Bid.objects.get(id=kwargs['id'])
+            serializer = self.get_serializer(bid, data=request.data)
+        except Exception:
+            return bad_request_response({"message": "bid not exist"})
         if serializer.is_valid():
             serializer.save()
             return success_response(serializer.data)
         return bad_request_response(serializer.errors)
 
+
     def delete(self, request, *args, **kwargs):
-        instance = generics.get_object_or_404(  BidSerializer , id=kwargs['id'])
+        instance = generics.get_object_or_404(  BidSerializer ,   advertisement =kwargs['id'])
         instance.delete()
         return empty_response()
 
@@ -93,22 +96,27 @@ class AdImagesChanges(generics.ListAPIView, generics.UpdateAPIView, generics.Des
     serializer_class =  AdImagesSerializer
 
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer( AdImages.objects.get(id=kwargs['id']))
+        serializer = self.get_serializer( AdImages.objects.filter(advertisement =kwargs['id']) , many = True)
         return success_response(serializer.data)
 
     def put(self, request, *args, **kwargs):
-        instance = generics.get_object_or_404( AdImagesSerializer, id=kwargs['id'])
-        serializer = self.get_serializer(instance=instance, data=request.data)
+
+        try:
+            image = AdImages.objects.get(id=kwargs['id'])
+            serializer = self.get_serializer(image, data = request.data)
+        except Exception:
+            return bad_request_response({"message" : "image not exist"})
+
         if serializer.is_valid():
             serializer.save()
             return success_response(serializer.data)
         return bad_request_response(serializer.errors)
 
+
     def delete(self, request, *args, **kwargs):
-        instance = generics.get_object_or_404(  AdImagesSerializer , id=kwargs['id'])
-        instance.delete()
-        return empty_response()
-
-
-
+        try:
+            image = AdImages.objects.get(id=kwargs['id']).delete()
+            return empty_response()
+        except Exception:
+            return bad_request_response({"message": "image not exist"})
 

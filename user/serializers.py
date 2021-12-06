@@ -1,7 +1,6 @@
 from rest_framework import serializers
 import re
-
-
+from user.models import User
 
 class RegisterSerializer(serializers.Serializer):
 
@@ -84,5 +83,15 @@ class ResetPasswordSerializer(serializers.Serializer):
 
     class Meta:
         fields = ['email']
+
+
+
+class UserSerializer(serializers.Serializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
+
+
 
 

@@ -35,7 +35,7 @@ class Advertisement(models.Model):
         return self.product.category
 
     def __str__(self):
-        return self.product.name
+        return str(self.id)
 
 
 class AdImages(models.Model):
@@ -53,6 +53,6 @@ class Bid(models.Model):
     selected = models.BooleanField(default=False)
     
     def __str__(self):
-        return str(self.amount) +" "+ self.user.username
+        return str(self.amount) +" "+ str(self.user)
 
 

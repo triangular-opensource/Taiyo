@@ -5,9 +5,10 @@ from django.utils import timezone
 
 
 class User(AbstractUser):
+    first_name = models.CharField(max_length=30)
+    middle_name = models.CharField(max_length=30, blank=True, null=True)
+    last_name = models.CharField(max_length=30)
     image = models.URLField(blank=True, null=True, max_length=255)
-
-    middle_name = models.CharField(max_length=30)
     gst_number = models.CharField(max_length=16)
     phone_number = models.CharField(max_length=16)
 
