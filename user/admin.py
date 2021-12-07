@@ -4,7 +4,7 @@ from rest_framework.authtoken.models import Token, TokenProxy
 
 from user.models import Token, User
 
-@admin.register(User)
+admin.site.register(User)
 class UserAdmin(BaseUserAdmin):
     model = User
     ordering = ["id"]
@@ -43,6 +43,6 @@ class UserAdmin(BaseUserAdmin):
         })
     )
     readonly_fields = ['date_joined', 'last_login']
-    
+
 
 admin.site.unregister(TokenProxy)

@@ -1,9 +1,6 @@
 import math
 import random
 
-from django.contrib.auth import get_user_model
-from django.shortcuts import get_object_or_404
-
 from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -20,7 +17,7 @@ from services.functions import send_activation_email
 from services.response import *
 from services.utility import *
 from .models import *
-from rest_framework import status
+from django.contrib.auth import get_user_model
 
 User = get_user_model()
 generate_token = EmaiLVerIficationTokenGenerator()
@@ -145,7 +142,7 @@ def activate_user(request, uidb64, token):
 
 
 
-@permission_classes((IsAuthenticated ))
+@permission_classes((IsAuthenticated , ))
 class UserView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     def get(self, request, *args, **kwargs):
