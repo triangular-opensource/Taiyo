@@ -1,13 +1,14 @@
 from rest_framework import serializers
 import re
-from user.models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class RegisterSerializer(serializers.Serializer):
 
     first_name = serializers.CharField(required=True, max_length=75)
     middle_name = serializers.CharField(required=False, max_length=30)
-    last_name = serializers.CharField(max_length=75)
-    username = serializers.CharField(required=True, max_length=75)
+    last_name = serializers.CharField(required=True, max_length=75)
     gst_number = serializers.CharField(required= True,max_length=16)
     phone_number = serializers.CharField(required=True, max_length=16)
 
@@ -19,7 +20,6 @@ class RegisterSerializer(serializers.Serializer):
     company_country = serializers.CharField(required=True , max_length=50)
     company_pin_code = serializers.CharField(required=True , max_length=50)
 
-
     email = serializers.CharField(required=True, max_length=75)
     password = serializers.CharField(required=True, max_length=50)
 
@@ -28,7 +28,6 @@ class RegisterSerializer(serializers.Serializer):
                   'first_name',
                   'middle_name',
                   'last_name',
-                  'username',
                   'email',
                   'password',
                   'gst_number',
@@ -36,8 +35,9 @@ class RegisterSerializer(serializers.Serializer):
                   'company_name',
                   'company_address',
                   'company_city',
-                  'company_state','company_country',
-                  'company_pin_code'
+                  'company_state',
+                  'company_country',
+                  'company_pin_code',
                   ]
 
     @classmethod
@@ -86,7 +86,7 @@ class ResetPasswordSerializer(serializers.Serializer):
 
 
 
-class UserSerializer(serializers.Serializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'

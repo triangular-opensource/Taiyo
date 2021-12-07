@@ -145,9 +145,10 @@ def activate_user(request, uidb64, token):
 
 
 
-@permission_classes((IsAuthenticated ))
+@permission_classes((IsAuthenticated,))
 class UserView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
+    
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(User.objects.all(), many=True)
         return success_response(serializer.data)
@@ -160,7 +161,7 @@ class UserView(generics.RetrieveAPIView):
         return bad_request_response(serializer.errors)
 
 
-@permission_classes((IsAuthenticated ,))
+@permission_classes((AllowAny ,))
 class UserChanges(generics.ListAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
     serializer_class = UserSerializer
     def get(self, request, *args, **kwargs):
