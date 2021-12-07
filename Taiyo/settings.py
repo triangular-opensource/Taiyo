@@ -135,9 +135,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.TokenAuthentication',),
+<<<<<<< HEAD
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',
 
 ),
+=======
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAdminUser',    
+    ),
+>>>>>>> 2776ba51f29f5f74427361ed6b5487267990f660
     'EXCEPTION_HANDLER': 'services.response.custom_exception_handler'
 }
 
