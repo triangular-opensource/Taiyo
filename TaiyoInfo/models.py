@@ -81,10 +81,11 @@ class Product(models.Model):
 
 
 class Subscription(models.Model):
+    name = models.CharField(max_length=30)
     amount = models.CharField(max_length=30)
     days = models.CharField(max_length=100)
     def __str__(self):
-        return self.amount
+        return self.name
 
 
 class Contact(models.Model):

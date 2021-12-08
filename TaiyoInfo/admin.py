@@ -56,7 +56,6 @@ class NewsLetterAdmin(admin.ModelAdmin):
 
 admin.site.register(Category)
 admin.site.register(Product)
-admin.site.register(Subscription)
 
 
 
@@ -64,3 +63,10 @@ admin.site.register(Subscription)
 class Constactdmin(admin.ModelAdmin):
     list_display = ['id', 'name','email' , 'subject']
     list_display_links = ['id', 'name' , 'email' , 'subject']
+
+
+
+@admin.register(Subscription)
+class SubscriptionAdmin(admin.ModelAdmin):
+    list_display = ['name', 'amount' , 'days']
+    list_display_links = ['name' , 'amount' , 'days']
