@@ -75,7 +75,7 @@ class ProductView(generics.RetrieveAPIView):
 class SubscriptionView(generics.RetrieveAPIView):
     serializer_class = SubscriptionSerializer
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Subscription.objects.aa(), many=True)
+        serializer = self.get_serializer(Subscription.objects.all(), many=True)
         return success_response(serializer.data)
 
 

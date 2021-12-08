@@ -68,5 +68,5 @@ class Constactdmin(admin.ModelAdmin):
 
 @admin.register(Subscription)
 class SubscriptionAdmin(admin.ModelAdmin):
-    list_display = ['name', 'amount' , 'days']
-    list_display_links = ['name' , 'amount' , 'days']
+    list_display = ['name','amount','days']
+    list_display_links = ['name','amount','days']
