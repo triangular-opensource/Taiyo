@@ -26,9 +26,4 @@ class Migration(migrations.Migration):
             name='product',
             field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='TaiyoInfo.product'),
         ),
-        migrations.AddField(
-            model_name='adimages',
-            name='advertisement',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='Ads.advertisement'),
-        ),
     ]

@@ -122,8 +122,6 @@ class RPTChangeView(generics.CreateAPIView):
         return bad_request_response({'Message': "failure"})
 
 
-
-
 def activate_user(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -137,21 +135,15 @@ def activate_user(request, uidb64, token):
     return JsonResponse({'Message': "Account activation failed"})
 
 
-
-
-
-
-
-@permission_classes((IsAuthenticated , ))
-class UserView(generics.RetrieveAPIView):
+class UserProfileView(generics.RetrieveAPIView, generics.UpdateAPIView):
     serializer_class = UserSerializer
-    
+
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(User.objects.all(), many=True)
+        serializer = self.serializer_class(request.user)
         return success_response(serializer.data)
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+    def patch(self, request, *args, **kwargs):
+        serializer = self.serializer_class(instance=request.user, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return success_response(serializer.data)

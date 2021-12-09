@@ -1,17 +1,24 @@
 ADS_CATEGORY = (
-    ('coatedFlatSteel', 'Coated Flat Steel'),
-    ('scrap', 'Scrap'),
-    ('uncoatedFlatSteel', 'Uncoated Flat Steel'),
+    ('Coated Flat Steel', 'CoatedFlatSteel'),
+    ('Scrap', 'Scrap'),
+    ('Uncoated Flat Steel', 'UncoatedFlatSteel'),
 )
 BUY_OR_SELL = (
-    ("buy", "Buy"),
-    ("sell", "Sell"),
+    ("Buy", "Buy"),
+    ("Sell", "Sell"),
 )
 AD_TEMPER = (
-    ("hard", "Hard"),
-    ("soft", "Soft"),
+    ("Hard", "Hard"),
+    ("Soft", "Soft"),
 )
 AD_QUALITY = (
-    ("prime", "Prime"),
-    ("defective", "Defective"),
+    ("Prime", "Prime"),
+    ("Defective", "Defective"),
+)
+COMPANY_TYPE = (
+    ("Proprietorship", "Proprietorship"),
+    ("Partnership", "Partnership"),
+    ("Pvt Ltd", "PvtLtd"),
+    ("Ltd", "Ltd"),
+    ("LLP", "LLP"),
 )

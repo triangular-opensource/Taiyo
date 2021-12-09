@@ -14,25 +14,23 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='AdImages',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.URLField(blank=True, max_length=300, null=True)),
-            ],
-        ),
-        migrations.CreateModel(
             name='Advertisement',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('buy_or_sell', models.CharField(choices=[('buy', 'Buy'), ('sell', 'Sell')], max_length=4)),
+                ('buy_or_sell', models.CharField(choices=[('Buy', 'Buy'), ('Sell', 'Sell')], max_length=4)),
                 ('basic_price', models.FloatField()),
                 ('excel_file', models.URLField(blank=True, max_length=300, null=True)),
-                ('quality', models.CharField(choices=[('prime', 'Prime'), ('defective', 'Defective')], max_length=10)),
+                ('pdf_file', models.URLField(blank=True, max_length=300, null=True)),
+                ('image_1', models.URLField(blank=True, max_length=300, null=True)),
+                ('image_2', models.URLField(blank=True, max_length=300, null=True)),
+                ('image_3', models.URLField(blank=True, max_length=300, null=True)),
+                ('image_4', models.URLField(blank=True, max_length=300, null=True)),
+                ('quality', models.CharField(choices=[('Prime', 'Prime'), ('Defective', 'Defective')], max_length=10)),
                 ('thickness', models.IntegerField()),
                 ('width', models.IntegerField()),
                 ('length', models.IntegerField()),
                 ('grade_or_spec', models.CharField(max_length=50)),
-                ('temper', models.CharField(choices=[('hard', 'Hard'), ('soft', 'Soft')], max_length=4)),
+                ('temper', models.CharField(choices=[('Hard', 'Hard'), ('Soft', 'Soft')], max_length=4)),
                 ('specification_number', models.CharField(max_length=20)),
                 ('quantity', models.IntegerField()),
                 ('coating_in_gsm', models.CharField(max_length=30)),

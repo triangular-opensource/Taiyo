@@ -48,7 +48,7 @@ class Migration(migrations.Migration):
                 ('package_type', models.CharField(max_length=10)),
                 ('package_expiry', models.DateTimeField(default=django.utils.timezone.now)),
                 ('company_name', models.CharField(max_length=50)),
-                ('company_type', models.CharField(max_length=30)),
+                ('company_type', models.CharField(choices=[('Proprietorship', 'Proprietorship'), ('Partnership', 'Partnership'), ('Pvt Ltd', 'PvtLtd'), ('Ltd', 'Ltd'), ('LLP', 'LLP')], max_length=30)),
                 ('company_address', models.CharField(max_length=50)),
                 ('company_city', models.CharField(max_length=50)),
                 ('company_state', models.CharField(max_length=50)),
