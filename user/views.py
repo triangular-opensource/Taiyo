@@ -34,7 +34,7 @@ class RegisterAPI(generics.CreateAPIView):
         check_user = User.objects.all().filter(username=request.data['email'])
         if not check_user:
             user = User.objects.create_user(first_name=request.data['first_name'], last_name=request.data['last_name'],
-                                            username=request.data['username'], email=request.data['email'],
+                                            username=request.data['email'], email=request.data['email'],
                                             password=request.data['password'], is_active=False)
             user.save()
             send_activation_email(user, request)
