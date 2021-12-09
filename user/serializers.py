@@ -111,7 +111,7 @@ class UserSerializer(serializers.ModelSerializer):
             "last_login",
             "date_joined"
         ]
-        readonly_fields = ["id", "last_login", "date_joined", "email"]
+        read_only_fields = ["id", "last_login", "date_joined", "email"]
 
 
 
