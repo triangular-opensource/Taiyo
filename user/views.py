@@ -41,7 +41,6 @@ class RegisterAPI(generics.CreateAPIView):
                 email=request.data['email'],
                 password=request.data['password'],
                 is_active=False,
-                image=request.data['image'],
                 gst_number=request.data['gst_number'],
                 phone_number=request.data['phone_number'],
                 company_name=request.data['company_name'],
