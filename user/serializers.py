@@ -89,7 +89,29 @@ class ResetPasswordSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = [
+            "id",
+            "first_name",
+            "middle_name",
+            "last_name",
+            "email",
+            "image",
+            "gst_number",
+            "phone_number",
+            "user_type",
+            "package_type",
+            "package_expiry",
+            "company_name",
+            "company_type",
+            "company_address",
+            "company_city",
+            "company_state",
+            "company_country",
+            "company_pin_code",
+            "last_login",
+            "date_joined"
+        ]
+        read_only_fields = ["id", "last_login", "date_joined", "email"]
 
 
 
