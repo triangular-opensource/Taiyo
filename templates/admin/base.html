@@ -6,6 +6,8 @@
 {% block extrastyle %}
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
     <link href='{% static "suit/css/font-awesome.min.css" %}' rel='stylesheet' type='text/css'>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
 {% endblock %}
 
 {% block bodyclass %}{{ block.super|suit_body_class:request }}{% endblock %}
@@ -140,4 +142,5 @@
     {% endif %}
 
 {#    <div> <!-- Fix/close div previously closed by footer -->#}
+    <script src="/static/js/admin_file_upload_to_firebase.js"></script>
 {% endblock %}

@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
 
+from services.constant import COMPANY_TYPE
 from services.validators import validate_phone_number, validate_pincode
 
 
@@ -19,7 +20,7 @@ class User(AbstractUser):
     package_expiry = models.DateTimeField(default=timezone.now)
 
     company_name = models.CharField(max_length=50)
-    company_type = models.CharField(max_length=30)
+    company_type = models.CharField(max_length=30, choices=COMPANY_TYPE)
     company_address = models.CharField(max_length=50)
     company_city = models.CharField(max_length=50)
     company_state = models.CharField(max_length=50)

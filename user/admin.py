@@ -4,7 +4,7 @@ from rest_framework.authtoken.models import Token, TokenProxy
 
 from user.models import Token, User
 
-admin.site.register(User)
+@admin.register(User)
 class UserAdmin(BaseUserAdmin):
     model = User
     ordering = ["id"]
