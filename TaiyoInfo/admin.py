@@ -4,14 +4,14 @@ from .models import GeneralInfo, Addres, Policy, NewsLetter , Category , Product
 
 @admin.register(GeneralInfo)
 class GeneralInfoAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'contact']
+    list_display = ['name', 'email', 'phone_number']
     list_display_links = ['name']
     fieldsets = (
         (None, {
-            'fields': ('name', 'email', 'contact', 'copyright',)
+            'fields': ('name', 'email', 'phone_number', 'copyright',)
         }),
         ('Images', {
-            'fields': ('icon', 'icon_tag', 'cover_image','cover_tag')
+            'fields': ('icon','icon_link', 'icon_tag', 'cover_image','cover_image_link','cover_tag')
         }),
         ('About', {
             'fields': (

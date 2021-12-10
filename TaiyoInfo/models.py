@@ -26,12 +26,14 @@ class Policy(models.Model):
 
 class GeneralInfo(models.Model):
     name = models.CharField(max_length=50)
-    icon = models.URLField(max_length=200)
-    cover_image = models.URLField(max_length=200, null=True, blank=True)
+    icon = models.FileField(null=True)
+    icon_link = models.URLField(max_length=300, null=True, blank=True)
+    cover_image = models.FileField(null=True)
+    cover_image_link = models.URLField(max_length=200, null=True, blank=True)
     intro = models.TextField(blank=True)
     about = models.TextField(blank=True)
     email = models.EmailField(max_length=50, null=True, validators=[validate_email_id])
-    contact = models.CharField(max_length=10, null=True, validators=[validate_phone_number])
+    phone_number = models.CharField(max_length=10, null=True, validators=[validate_phone_number])
     twitter = models.URLField(max_length=200, null=True, blank=True)
     linked_in = models.URLField(max_length=200, null=True, blank=True)
     facebook = models.URLField(max_length=200, null=True, blank=True)
@@ -42,12 +44,12 @@ class GeneralInfo(models.Model):
     def icon_tag(self):
         if self.icon:
             return mark_safe(f'<img src="{self.icon}" width="auto" height="150px" />')
-        return "No icon selected!"
+        return mark_safe('<span id="icon_display">No image selected!</span>')
     
     def cover_tag(self):
         if self.cover_image:
             return mark_safe(f'<img src="{self.cover_image}" width="auto" height="150" />')
-        return "No cover image selected!"
+        return mark_safe('<span id="cover_display">No image selected!</span>')
 
     icon_tag.short_description = 'Icon Preview'
     cover_tag.short_description = 'Cover Preview'
@@ -84,6 +86,7 @@ class Subscription(models.Model):
     name = models.CharField(max_length=30)
     amount = models.CharField(max_length=30)
     days = models.CharField(max_length=100)
+
     def __str__(self):
         return self.name
 
@@ -92,6 +95,7 @@ class Contact(models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField(max_length=50, validators=[validate_email_id])
     subject = models.CharField(max_length=50)
-    message = models.TextField(blank=True)
+    message = models.TextField()
+
     def __str__(self):
         return self.name

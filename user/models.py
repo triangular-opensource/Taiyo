@@ -4,7 +4,7 @@ from django.db import models
 from django.utils import timezone
 
 from services.constant import COMPANY_TYPE
-from services.validators import validate_phone_number, validate_pincode
+from services.validators import validate_gst_number, validate_phone_number, validate_pincode
 
 
 class User(AbstractUser):
@@ -12,7 +12,7 @@ class User(AbstractUser):
     middle_name = models.CharField(max_length=30, blank=True, null=True)
     last_name = models.CharField(max_length=30)
     image = models.URLField(blank=True, null=True, max_length=255)
-    gst_number = models.CharField(max_length=16)
+    gst_number = models.CharField(max_length=16, validators=[validate_gst_number])
     phone_number = models.CharField(max_length=16, validators=[validate_phone_number])
 
     user_type = models.CharField(max_length=20)
@@ -26,6 +26,8 @@ class User(AbstractUser):
     company_state = models.CharField(max_length=50)
     company_country = models.CharField(max_length=50)
     company_pin_code = models.CharField(max_length=6, validators=[validate_pincode])
+
+    friends = models.ManyToManyField("self", null=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.username:

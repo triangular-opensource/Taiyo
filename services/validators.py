@@ -46,8 +46,16 @@ def validate_copyright(value):
 
 def validate_pincode(value):
     if value:
-        copyright_regex = RegexValidator(
+        pincode_regex = RegexValidator(
             regex=r'^[1-9][0-9]{5}$',
             message="Pincode must not start with 0 and must be of 6 characters."
         )
-        copyright_regex(value)
+        pincode_regex(value)
+
+def validate_gst_number(value):
+    if value:
+        gst_regex = RegexValidator(
+            regex="^[0-9]{2}[A-Z]{5}[0-9]{4}" +"[A-Z]{1}[1-9A-Z]{1}" +"Z[0-9A-Z]{1}$",
+            message="GST number is not valid."
+        )
+        gst_regex(value)

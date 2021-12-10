@@ -25,20 +25,21 @@ class RegisterSerializer(serializers.Serializer):
 
     class Meta:
         fields = [
-                  'first_name',
-                  'middle_name',
-                  'last_name',
-                  'email',
-                  'password',
-                  'gst_number',
-                  'phone_number',
-                  'company_name',
-                  'company_address',
-                  'company_city',
-                  'company_state',
-                  'company_country',
-                  'company_pin_code',
-                  ]
+            'first_name',
+            'middle_name',
+            'last_name',
+            'email',
+            'password',
+            'gst_number',
+            'phone_number',
+            'company_name',
+            'company_address',
+            'company_city',
+            'company_state',
+            'company_country',
+            'company_pin_code',
+        ]
+        optional_fields = ['middle_name',]
 
     @classmethod
     def validate_email(cls, value):

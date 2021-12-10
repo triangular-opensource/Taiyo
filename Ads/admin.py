@@ -1,10 +1,18 @@
 from django.contrib import admin
 
-from Ads.models import Advertisement , Bid
+from Ads.models import Advertisement, Bid
 
 class AdAdmin(admin.ModelAdmin):
-    list_display = ['id', 'product', 'category']
-    readonly_fields = ['category', 'image_1_display', 'image_2_display', 'image_3_display', 'image_4_display']
+    list_display = ['__str__', 'product', 'category']
+    list_display_links = ["__str__", "product", "category"]
+    readonly_fields = [
+        'category',
+        'image_1_display',
+        'image_2_display',
+        'image_3_display',
+        'image_4_display',
+        "bidding_close_date",
+    ]
     fieldsets = (
         (None, {
             "fields": (
@@ -28,7 +36,9 @@ class AdAdmin(admin.ModelAdmin):
         ("Files", {
             "fields": (
                 "excel_file",
+                "excel_file_link",
                 "pdf_file",
+                "pdf_file_link",
                 "image_1",
                 "image_1_link",
                 "image_1_display",
