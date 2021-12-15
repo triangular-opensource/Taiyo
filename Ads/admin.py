@@ -8,39 +8,11 @@ class AdAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             "fields": (
+                "buy_or_sell",
                 'product',
                 'category',
-                "buy_or_sell",
-                "basic_price",
                 "product_description",
-                "bidding",
-                "bidding_close_date",
-            ),
-        }),
-        ("Author Details", {
-            "fields": (
-                "author_name",
-                "author_mobile_number",
-                "author_country",
-                "author_buisness_address",
-            )
-        }),
-        ("Files", {
-            "fields": (
-                "excel_file",
-                "pdf_file",
-                "image_1",
-                "image_1_link",
-                "image_1_display",
-                "image_2",
-                "image_2_link",
-                "image_2_display",
-                "image_3",
-                "image_3_link",
-                "image_3_display",
-                "image_4",
-                "image_4_link",
-                "image_4_display",
+                "basic_price"
             ),
         }),
         ("Product Specification", {
@@ -56,6 +28,41 @@ class AdAdmin(admin.ModelAdmin):
                 "coating_in_gsm",
             )
         }),
+
+        ("Bidding Data", {
+            "fields": (
+                "bidding",
+                "bidding_close_date"
+            )
+        }),
+
+        ("Files", {
+            "fields": (
+                "image_1",
+                "image_1_link",
+                "image_1_display",
+                "image_2",
+                "image_2_link",
+                "image_2_display",
+                "image_3",
+                "image_3_link",
+                "image_3_display",
+                "image_4",
+                "image_4_link",
+                "image_4_display",
+                "excel_file",
+                "pdf_file",
+            ),
+        }),
+
+        ("Author Details", {
+            "fields": (
+                "author_name",
+                "author_mobile_number",
+                "author_country",
+                "author_business_address",
+            )
+        })
     )
 
 admin.site.register(Advertisement, AdAdmin)

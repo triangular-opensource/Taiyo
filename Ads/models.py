@@ -25,9 +25,9 @@ class Advertisement(models.Model):
     image_4 = models.FileField(null=True, blank=True)
     image_4_link = models.URLField(max_length=300, null=True, blank=True)
     quality = models.CharField(max_length=10, choices=AD_QUALITY)
-    thickness = models.IntegerField()
-    width = models.IntegerField()
-    length = models.IntegerField()
+    thickness = models.FloatField()
+    width = models.FloatField()
+    length = models.FloatField()
     grade_or_spec = models.CharField(max_length=50)
     temper = models.CharField(max_length=4, choices=AD_TEMPER)
     specification_number = models.CharField(max_length=20)
@@ -39,7 +39,7 @@ class Advertisement(models.Model):
     author_name = models.CharField(max_length=40)
     author_mobile_number = models.CharField(max_length=10)
     author_country = models.CharField(max_length=20)
-    author_buisness_address = models.CharField(max_length=100)
+    author_business_address = models.CharField(max_length=100)
 
     @property
     def category(self):

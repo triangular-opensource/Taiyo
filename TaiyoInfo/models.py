@@ -6,7 +6,7 @@ from services.validators import validate_copyright, validate_email_id, validate_
 
 
 class Addres(models.Model):
-    address = models.CharField(max_length=50)
+    address = models.CharField(max_length=100)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
