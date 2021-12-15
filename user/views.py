@@ -33,9 +33,24 @@ class RegisterAPI(generics.CreateAPIView):
             return bad_request_response(serializer.errors)
         check_user = User.objects.all().filter(username=request.data['email'])
         if not check_user:
-            user = User.objects.create_user(first_name=request.data['first_name'], last_name=request.data['last_name'],
-                                            username=request.data['email'], email=request.data['email'],
-                                            password=request.data['password'], is_active=False)
+            user = User.objects.create_user(
+                first_name=request.data['first_name'],
+                last_name=request.data['last_name'],
+                middle_name=request.data['middle_name'],
+                username=request.data['email'],
+                email=request.data['email'],
+                password=request.data['password'],
+                is_active=False,
+                gst_number=request.data['gst_number'],
+                phone_number=request.data['phone_number'],
+                company_name=request.data['company_name'],
+                company_type=request.data['company_type'],
+                company_address=request.data['company_address'],
+                company_city=request.data['company_city'],
+                company_state=request.data['company_state'],
+                company_country=request.data['company_country'],
+                company_pin_code=request.data['company_pin_code'],
+            )
             user.save()
             send_activation_email(user, request)
             return create_response({"message": "Email Activation Link Sent."})
@@ -135,6 +150,7 @@ def activate_user(request, uidb64, token):
     return JsonResponse({'Message': "Account activation failed"})
 
 
+@permission_classes((IsAuthenticated, ))
 class UserProfileView(generics.RetrieveAPIView, generics.UpdateAPIView):
     serializer_class = UserSerializer
 

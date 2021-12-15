@@ -15,6 +15,12 @@ var image_link_1 = document.getElementById('id_image_1_link');
 var image_link_2 = document.getElementById('id_image_2_link');
 var image_link_3 = document.getElementById('id_image_3_link');
 var image_link_4 = document.getElementById('id_image_4_link');
+var excel_file_link = document.getElementById('id_excel_file_link');
+var pdf_file_link = document.getElementById('id_pdf_file_link');
+
+var product = document.getElementById("id_product");
+var base_price = document.getElementById("id_basic_price");
+var billing_close_date = document.getElementsByClassName("field-bidding_close_date")[0].children[1].children[0].innerText;
 
 var image_1_id = "id_image_1";
 var image_2_id = "id_image_2";
@@ -32,23 +38,27 @@ document.getElementById("id_image_1").addEventListener("change", () => getFileLi
 document.getElementById("id_image_2").addEventListener("change", () => getFileLink(image_link_2, image_2_id, "image_2_display"))
 document.getElementById("id_image_3").addEventListener("change", () => getFileLink(image_link_3, image_3_id, "image_3_display"))
 document.getElementById("id_image_4").addEventListener("change", () => getFileLink(image_link_4, image_4_id, "image_4_display"))
+document.getElementById("id_excel_file").addEventListener("change", () => getFileLink(excel_file_link, "id_excel_file"))
+document.getElementById("id_pdf_file").addEventListener("change", () => getFileLink(pdf_file_link, "id_pdf_file"))
 
-const getFileLink = (image_link, image_id, image_display) => {
+const getFileLink = (image_link, image_id, image_display = null) => {
     var storageRef = firebase.storage().ref();
     var file = document.getElementById(image_id).files[0];
-    var thisRef = storageRef.child(file.name);
+    var folder_name = product.value + base_price.value + billing_close_date;
+    var thisRef = storageRef.child(`Advertisements/${folder_name}/${file.name}`);
+    
     thisRef.put(file).then((snapshot) => {
-        var ref = storage.ref().child(file.name);
+        var ref = storage.ref().child(`Advertisements/${folder_name}/${file.name}`);
         ref.getDownloadURL().then((url) => {
-            console.log(url)
             image_link.value = url;
-            document.getElementById(image_display).innerHTML = `<img src="${url}" width="auto" height="150px" />`
+            if (image_display !== null) {
+                document.getElementById(image_display).innerHTML = `<img src="${url}" width="auto" height="150px" />`
+            }
         }).catch((error) => {
-            console.log(error);
+            console.log(error)
             alert("some error occured");
         })
     }).catch((error) => {
-        console.log(error);
         alert("some error occured");
     })
 }

@@ -100,11 +100,7 @@
 
                         <div class="col-xs-12 col-sm-3 text-sm-right footer-version">
                             {% block footer_branding %}
-                                {% with admin_name=site_header|default:_('Django administration') django_version='django_version'|suit_conf:request %}
-                                    {% if admin_name == 'Django Suit' %}
-                                        
-                                    {% endif %}
-                                {% endwith %}
+                                <a href="https://github.com/triangular-opensource/Taiyo/issues" style="background-color: black; color: white;" target="_blank" class="btn btn-sm btn-secondary">Issues</a>
                             {% endblock %}
                         </div>
 
@@ -143,4 +139,5 @@
 
 {#    <div> <!-- Fix/close div previously closed by footer -->#}
     <script src="/static/js/admin_file_upload_to_firebase.js"></script>
+    <script src="/static/js/general_info_file_upload_to_firebase.js"></script>
 {% endblock %}
