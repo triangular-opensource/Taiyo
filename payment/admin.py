@@ -1,10 +1,9 @@
 from django.contrib import admin
-from paranoid_model.admin import ParanoidAdmin
 
 from payment.models import Payment
 
 @admin.register(Payment)
-class PaymentAdmin(ParanoidAdmin):
+class PaymentAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'amount', 'paid']
     list_display_links = ['id', 'user']
     search_fields = list_display
@@ -25,9 +24,9 @@ class PaymentAdmin(ParanoidAdmin):
         (
             "Important Dates",
             {
-                "fields": ["created_at", "updated_at", "deleted_at"]
+                "fields": ["timestamp",]
             },
         ),
     )
-    readonly_fields = ("created_at", "updated_at", "deleted_at")
+    readonly_fields = ("timestamp",)
     
