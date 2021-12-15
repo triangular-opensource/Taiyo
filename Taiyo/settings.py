@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'TaiyoInfo.apps.TaiyoinfoConfig',
     'user',
     'Ads',
+    'payment',
 ]
 
 

@@ -27,7 +27,7 @@ class User(AbstractUser):
     company_country = models.CharField(max_length=50)
     company_pin_code = models.CharField(max_length=6, validators=[validate_pincode])
 
-    friends = models.ManyToManyField("self", null=True, blank=True)
+    friends = models.ManyToManyField("self", blank=True)
 
     def save(self, *args, **kwargs):
         if not self.username:
