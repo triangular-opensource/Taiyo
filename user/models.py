@@ -12,8 +12,8 @@ class User(AbstractUser):
     middle_name = models.CharField(max_length=30, blank=True, null=True)
     last_name = models.CharField(max_length=30)
     image = models.URLField(blank=True, null=True, max_length=255)
-    gst_number = models.CharField(max_length=16, validators=[validate_gst_number])
-    phone_number = models.CharField(max_length=16, validators=[validate_phone_number])
+    gst_number = models.CharField(max_length=15, validators=[validate_gst_number])
+    phone_number = models.CharField(max_length=10, validators=[validate_phone_number])
 
     user_type = models.CharField(max_length=20)
     package_type = models.CharField(max_length=10)
