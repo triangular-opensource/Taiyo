@@ -3,6 +3,7 @@ import json
 from rest_framework.permissions import IsAuthenticated
 import razorpay
 from django.contrib.auth import get_user_model
+from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from rest_framework.decorators import permission_classes
@@ -22,12 +23,12 @@ client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
 @permission_classes((IsAuthenticated, ))
 class GetBillingUserData(generics.CreateAPIView):
     def post(self, request, *args, **kwargs):
-        data = json.loads(request.data)
+        data = request.data
         amount = int(data.get("amount"))
         order = client.order.create({"amount":amount*100, "currency":"INR"})
         order = Payment(user=request.user, amount=amount, order_id=order['id'])
         order.save()
-        return success_response({"data": order})
+        return success_response({"data": model_to_dict(order)})
 
 
 @permission_classes((IsAuthenticated,))
