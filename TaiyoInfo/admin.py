@@ -1,9 +1,30 @@
 from django.contrib import admin
+from django.http import HttpResponse, HttpResponseForbidden
 
 from .models import GeneralInfo, Addres, Policy, NewsLetter , Category , Product , Subscription , Contact
+import csv
+
+
 
 @admin.register(GeneralInfo)
 class GeneralInfoAdmin(admin.ModelAdmin):
+
+
+    @admin.action(description="download csv")
+    def download_csv(modeladmin, request, queryset):
+        try:
+            response = HttpResponse(content_type='text/csv')
+            response['Content-Disposition'] = f'attachment; filename="user.csv"'
+
+            writer = csv.writer(response)
+            writer.writerow([])
+            writer.writerow(['name', 'email', 'phone_number'])
+            for s in queryset:
+                writer.writerow([s.name, s.email, s.phone_number])
+            return response
+        except Exception as err:
+            return HttpResponseForbidden("<h1>403 Not Authorized</h1>")
+
     list_display = ['name', 'email', 'phone_number']
     list_display_links = ['name']
     fieldsets = (
@@ -27,6 +48,7 @@ class GeneralInfoAdmin(admin.ModelAdmin):
         }),
     )
     readonly_fields = ['icon_tag', 'cover_tag']
+    actions = ['download_csv']
 
     def has_add_permission(self, request):
         return False if self.model.objects.count() > 0 else super().has_add_permission(request)
@@ -70,3 +92,20 @@ class Constactdmin(admin.ModelAdmin):
 class SubscriptionAdmin(admin.ModelAdmin):
     list_display = ['name','amount','days']
     list_display_links = ['name','amount','days']
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

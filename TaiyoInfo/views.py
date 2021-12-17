@@ -101,3 +101,11 @@ class ContactView(generics.RetrieveAPIView, generics.CreateAPIView):
             sendContactEmail(data)
             return success_response(serializer.data)
         return bad_request_response(serializer.errors)
+
+
+
+
+
+
+
+
