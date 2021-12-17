@@ -45,3 +45,18 @@ def sendContactEmail(response):
     )
 
 
+
+
+def sendOtpEmail(response,email):
+    msg_html = render_to_string('email/otp.html', {'data': response})
+    send_mail(
+        'Taiyo : Reset Password Token',
+        msg_html,
+        "taiyo.apex@gmail.com",
+        [email],
+        html_message=msg_html,
+    )
+
+
+
+

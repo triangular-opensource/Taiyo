@@ -18,6 +18,7 @@ from services.response import *
 from services.utility import *
 from .models import *
 from django.contrib.auth import get_user_model
+from services.mailing import sendOtpEmail
 
 User = get_user_model()
 generate_token = EmaiLVerIficationTokenGenerator()
@@ -107,11 +108,7 @@ class ResetPasswordTokenView(generics.CreateAPIView):
                 index = math.floor(random.random() * 10)
                 token += str(digits[index])
             if token:
-                send_email(
-                        subject="Your Reset Token of Taiyo",
-                        message=token,
-                        to=request.data['email']
-                )
+                sendOtpEmail(token  , request.data['email'])
                 Token.objects.create(token=token, email=request.data["email"])
                 return create_response({'message': 'email sent'})
             return bad_request_response({'Message': "Invalid Username or Password!"})
