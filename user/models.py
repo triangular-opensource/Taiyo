@@ -12,8 +12,8 @@ class User(AbstractUser):
     middle_name = models.CharField(max_length=30, blank=True, null=True)
     last_name = models.CharField(max_length=30)
     image = models.URLField(blank=True, null=True, max_length=255)
-    gst_number = models.CharField(max_length=16, validators=[validate_gst_number])
-    phone_number = models.CharField(max_length=16, validators=[validate_phone_number])
+    gst_number = models.CharField(max_length=15, validators=[validate_gst_number])
+    phone_number = models.CharField(max_length=10, validators=[validate_phone_number])
 
     user_type = models.CharField(max_length=20)
     package_type = models.CharField(max_length=10)
@@ -27,7 +27,7 @@ class User(AbstractUser):
     company_country = models.CharField(max_length=50)
     company_pin_code = models.CharField(max_length=6, validators=[validate_pincode])
 
-    friends = models.ManyToManyField("self", null=True, blank=True)
+    friends = models.ManyToManyField("self", blank=True)
 
     def save(self, *args, **kwargs):
         if not self.username:

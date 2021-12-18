@@ -12,8 +12,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('TaiyoInfo', '0002_alter_addres_address'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('TaiyoInfo', '0002_alter_addres_address'),
     ]
 
     operations = [

@@ -12,7 +12,7 @@ generate_token = EmaiLVerIficationTokenGenerator()
 
 def send_activation_email(user, request):
     current_site = get_current_site(request)
-    subject = "Activate Taiyo Accout"
+    subject = "Activate your Taiyo Accout"
     body = render_to_string("activate.html", {
         "user": user,
         "domain": current_site,
