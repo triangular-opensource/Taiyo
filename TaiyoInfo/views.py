@@ -80,6 +80,15 @@ class SubscriptionView(generics.RetrieveAPIView):
 
 
 
+@permission_classes((AllowAny, ))
+class ProductCategoryView(generics.RetrieveAPIView):
+    serializer_class = ProductSerializer
+    def get(self, request, *args, **kwargs):
+        category = Category.objects.get(id=kwargs['id']).name
+        serializer = self.get_serializer(Product.objects.filter(category=category), many=True)
+        return success_response(serializer.data)
+
+
 
 @permission_classes((AllowAny,))
 class ContactView(generics.RetrieveAPIView, generics.CreateAPIView):
@@ -101,6 +110,8 @@ class ContactView(generics.RetrieveAPIView, generics.CreateAPIView):
             sendContactEmail(data)
             return success_response(serializer.data)
         return bad_request_response(serializer.errors)
+
+
 
 
 
