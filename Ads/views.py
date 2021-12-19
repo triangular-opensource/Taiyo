@@ -2,8 +2,10 @@ from rest_framework import generics
 from Ads.serializers import AdvertismentSerializer, BidSerializer
 from services.response import success_response, bad_request_response, empty_response
 from Ads.models import Advertisement, Bid
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
 
-
+@permission_classes((IsAuthenticated,))
 class AdvertismentView(generics.RetrieveAPIView):
     serializer_class = AdvertismentSerializer
     def get(self, request, *args, **kwargs):
@@ -18,6 +20,7 @@ class AdvertismentView(generics.RetrieveAPIView):
         return bad_request_response(serializer.errors)
 
 
+@permission_classes((IsAuthenticated,))
 class AdvertismentChanges(generics.ListAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
     serializer_class =  AdvertismentSerializer
 
@@ -39,6 +42,7 @@ class AdvertismentChanges(generics.ListAPIView, generics.UpdateAPIView, generics
         return empty_response()
 
 
+@permission_classes((IsAuthenticated,))
 class BidView(generics.RetrieveAPIView):
     serializer_class = BidSerializer
     def get(self, request, *args, **kwargs):
@@ -52,7 +56,7 @@ class BidView(generics.RetrieveAPIView):
             return success_response(serializer.data)
         return bad_request_response(serializer.errors)
 
-
+@permission_classes((IsAuthenticated,))
 class BidChanges(generics.ListAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
     serializer_class =  BidSerializer
     def get(self, request, *args, **kwargs):
