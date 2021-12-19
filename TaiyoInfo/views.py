@@ -113,5 +113,5 @@ class ContactView(generics.RetrieveAPIView, generics.CreateAPIView):
         return bad_request_response(serializer.errors)
 
 def admin_redirect(request):
-    return redirect("admin")
+    return redirect("admin/")
 
