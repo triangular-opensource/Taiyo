@@ -1,9 +1,8 @@
 from django.urls import path
 
-from TaiyoInfo.views import GeneralInfoView, AddressView, PolicyView, NewsLetterView , ContactView , SubscriptionView , CategoryView , ProductView , ProductCategoryView, admin_redirect
+from TaiyoInfo.views import GeneralInfoView, AddressView, PolicyView, NewsLetterView , ContactView , SubscriptionView , CategoryView , ProductView , ProductCategoryView
 
 urlpatterns = [
-    path("", admin_redirect, name="admin-redirect"),
     path("general-info", GeneralInfoView.as_view(), name="general-info"),
     path("address", AddressView.as_view(), name="address"),
     path("policy", PolicyView.as_view(), name="policy"),

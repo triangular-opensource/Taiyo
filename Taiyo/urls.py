@@ -18,11 +18,13 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls.conf import include
+from TaiyoInfo.views import admin_redirect
 
 from user.views import activate_user
 
 urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
+    path("", admin_redirect, name="admin-redirect"),
     path("api/", include("TaiyoInfo.urls")),
     path("api/", include("Ads.urls")),
     path("api/", include("payment.urls")),
