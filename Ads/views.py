@@ -13,7 +13,7 @@ class AdvertismentView(generics.RetrieveAPIView):
         return success_response(serializer.data)
 
     def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        serializer = self.get_serializer(data=request.data, user=request.user)
         if serializer.is_valid():
             serializer.save()
             return success_response(serializer.data)

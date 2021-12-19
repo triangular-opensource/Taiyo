@@ -20,7 +20,8 @@ class AdAdmin(admin.ModelAdmin):
                 'product',
                 'category',
                 "product_description",
-                "basic_price"
+                "basic_price",
+                "user"
             ),
         }),
         ("Product Specification", {
