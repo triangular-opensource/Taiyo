@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from rest_framework import generics
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
@@ -111,12 +112,6 @@ class ContactView(generics.RetrieveAPIView, generics.CreateAPIView):
             return success_response(serializer.data)
         return bad_request_response(serializer.errors)
 
-
-
-
-
-
-
-
-
+def admin_redirect(request):
+    return redirect("admin")
 

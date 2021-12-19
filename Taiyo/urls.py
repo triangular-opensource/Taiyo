@@ -22,7 +22,7 @@ from django.urls.conf import include
 from user.views import activate_user
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name="admin"),
     path("api/", include("TaiyoInfo.urls")),
     path("api/", include("Ads.urls")),
     path("api/", include("payment.urls")),
