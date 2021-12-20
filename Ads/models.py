@@ -46,6 +46,8 @@ class Advertisement(models.Model):
     author_business_address = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
+    timestamp = models.DateTimeField(auto_now=True)
+
     @property
     def category(self):
         return self.product.category

@@ -3,7 +3,7 @@ from django.contrib import admin
 from Ads.models import Advertisement, Bid
 
 class AdAdmin(admin.ModelAdmin):
-    list_display = ['__str__', 'product', 'category']
+    list_display = ['__str__', 'product', 'category', 'timestamp']
     list_display_links = ["__str__", "product", "category"]
     readonly_fields = [
         'category',
@@ -65,13 +65,17 @@ class AdAdmin(admin.ModelAdmin):
                 "pdf_file_link",
             ),
         }),
-
         ("Author Details", {
             "fields": (
                 "author_name",
                 "author_mobile_number",
                 "author_country",
                 "author_business_address",
+            )
+        }),
+        ("Important Dates", {
+            "fields": (
+                "timestamp",
             )
         })
     )
