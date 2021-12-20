@@ -38,7 +38,7 @@ class Advertisement(models.Model):
     quantity = models.IntegerField()
     coating_in_gsm = models.CharField(max_length=30)
     product_description = models.TextField()
-    bidding = models.BooleanField()
+    bidding = models.BooleanField(default=True)
     bidding_close_date = models.DateTimeField(default=timezone.now)
     author_name = models.CharField(max_length=40)
     author_mobile_number = models.CharField(max_length=10, validators=[validate_phone_number])

@@ -108,7 +108,7 @@ class ResetPasswordTokenView(generics.CreateAPIView):
                 index = math.floor(random.random() * 10)
                 token += str(digits[index])
             if token:
-                sendOtpEmail(token  , request.data['email'])
+                sendOtpEmail(token , request.data['email'])
                 Token.objects.create(token=token, email=request.data["email"])
                 return create_response({'message': 'email sent'})
             return bad_request_response({'Message': "Invalid Username or Password!"})
@@ -161,28 +161,3 @@ class UserProfileView(generics.RetrieveAPIView, generics.UpdateAPIView):
             serializer.save()
             return success_response(serializer.data)
         return bad_request_response(serializer.errors)
-
-
-@permission_classes((AllowAny ,))
-class UserChanges(generics.ListAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
-    serializer_class = UserSerializer
-    def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(User.objects.get(id=kwargs['id']))
-        return success_response(serializer.data)
-
-    def put(self, request, *args, **kwargs):
-        instance = generics.get_object_or_404( UserSerializer, id=kwargs['id'])
-        serializer = self.get_serializer(instance=instance, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return success_response(serializer.data)
-        return bad_request_response(serializer.errors)
-
-    def delete(self, request, *args, **kwargs):
-        instance = generics.get_object_or_404(  UserSerializer , id=kwargs['id'])
-        instance.delete()
-        return empty_response()
-
-
-
-

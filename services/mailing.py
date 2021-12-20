@@ -47,10 +47,10 @@ def sendContactEmail(response):
 
 
 
-def sendOtpEmail(response,email):
-    msg_html = render_to_string('email/otp.html', {'data': response})
+def sendOtpEmail(token, email):
+    msg_html = render_to_string('email/otp.html', {'token': token})
     send_mail(
-        'Taiyo : Reset Password Token',
+        'Taiyo : Reset Password Otp',
         msg_html,
         "taiyo.apex@gmail.com",
         [email],

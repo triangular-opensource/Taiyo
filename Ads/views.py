@@ -2,20 +2,21 @@ from rest_framework import generics
 from Ads.serializers import AdvertismentSerializer, BidSerializer
 from services.response import success_response, bad_request_response, empty_response
 from Ads.models import Advertisement, Bid
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import permission_classes
 
-@permission_classes((IsAuthenticated,))
+@permission_classes((AllowAny,))
 class AdvertismentView(generics.RetrieveAPIView):
     serializer_class = AdvertismentSerializer
+
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(Advertisement.objects.all(), many=True)
         return success_response(serializer.data)
 
     def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data, user=request.user)
+        serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(user=request.user)
             return success_response(serializer.data)
         return bad_request_response(serializer.errors)
 
