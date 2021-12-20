@@ -72,11 +72,6 @@ class AdAdmin(admin.ModelAdmin):
                 "author_country",
                 "author_business_address",
             )
-        }),
-        ("Important Dates", {
-            "fields": (
-                "timestamp",
-            )
         })
     )
 
