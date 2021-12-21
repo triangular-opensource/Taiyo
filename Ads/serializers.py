@@ -12,7 +12,8 @@ class AdvertisementViewSerializer(serializers.ModelSerializer):
                   'timestamp',
                   'author_business_address',
                   'author_country',
-                  'buy_or_sell']
+                  'buy_or_sell',
+                  'basic_price']
 
 class AdvertisementSerializer(serializers.ModelSerializer):
     class Meta:
