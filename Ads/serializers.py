@@ -8,7 +8,7 @@ class AdvertisementViewSerializer(serializers.ModelSerializer):
         model = Advertisement
         fields = ['id',
                   'image_1_link',
-                  'description',
+                  'product_description',
                   'timestamp',
                   'author_business_address',
                   'author_country',
