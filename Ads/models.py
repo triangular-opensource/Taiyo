@@ -1,7 +1,6 @@
 from datetime import timedelta
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models.fields import BigAutoField
 from django.utils import timezone
 from django.utils.html import mark_safe
 

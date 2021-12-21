@@ -1,17 +1,23 @@
 from rest_framework import generics
-from Ads.serializers import AdvertismentSerializer, BidSerializer
+from Ads.serializers import AdvertismentSerializer, BidSerializer , AdvertisementViewSerializer
 from services.response import success_response, bad_request_response, empty_response
 from Ads.models import Advertisement, Bid
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import permission_classes
 
+
 @permission_classes((AllowAny,))
 class AdvertismentView(generics.RetrieveAPIView):
-    serializer_class = AdvertismentSerializer
+    serializer_class = AdvertisementViewSerializer
 
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(Advertisement.objects.all(), many=True)
         return success_response(serializer.data)
+
+
+@permission_classes((IsAuthenticated,))
+class AdvertisementPostView(generics.RetrieveAPIView):
+    serializer_class = AdvertisementViewSerializer
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -23,7 +29,7 @@ class AdvertismentView(generics.RetrieveAPIView):
 
 @permission_classes((IsAuthenticated,))
 class AdvertismentChanges(generics.ListAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
-    serializer_class =  AdvertismentSerializer
+    serializer_class = AdvertismentSerializer
 
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(Advertisement.objects.get(id=kwargs['id']))
@@ -45,6 +51,7 @@ class AdvertismentChanges(generics.ListAPIView, generics.UpdateAPIView, generics
 
 @permission_classes((IsAuthenticated,))
 class BidView(generics.RetrieveAPIView):
+
     serializer_class = BidSerializer
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(Bid.objects.all(), many=True)
@@ -59,7 +66,7 @@ class BidView(generics.RetrieveAPIView):
 
 @permission_classes((IsAuthenticated,))
 class BidChanges(generics.ListAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
-    serializer_class =  BidSerializer
+    serializer_class = BidSerializer
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(Bid.objects.filter( advertisement =kwargs['id']) , many = True)
         return success_response(serializer.data)
