@@ -1,5 +1,5 @@
 from rest_framework import generics
-from Ads.serializers import AdvertismentSerializer, BidSerializer , AdvertisementViewSerializer
+from Ads.serializers import AdvertisementSerializer, BidSerializer , AdvertisementViewSerializer
 from services.response import success_response, bad_request_response, empty_response
 from Ads.models import Advertisement, Bid
 from rest_framework.permissions import AllowAny, IsAuthenticated
