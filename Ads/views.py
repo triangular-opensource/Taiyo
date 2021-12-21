@@ -17,7 +17,7 @@ class AdvertismentView(generics.RetrieveAPIView):
 
 @permission_classes((IsAuthenticated,))
 class AdvertisementPostView(generics.RetrieveAPIView):
-    serializer_class = AdvertisementViewSerializer
+    serializer_class = AdvertisementSerializer
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
