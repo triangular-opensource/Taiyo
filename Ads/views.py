@@ -29,7 +29,7 @@ class AdvertisementPostView(generics.RetrieveAPIView):
 
 @permission_classes((IsAuthenticated,))
 class AdvertismentChanges(generics.ListAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
-    serializer_class = AdvertismentSerializer
+    serializer_class = AdvertisementSerializer
 
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(Advertisement.objects.get(id=kwargs['id']))
