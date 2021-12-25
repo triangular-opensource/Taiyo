@@ -11,7 +11,7 @@ class AdvertismentView(generics.RetrieveAPIView):
     serializer_class = AdvertisementViewSerializer
 
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Advertisement.objects.all(), many=True)
+        serializer = self.get_serializer(Advertisement.objects.all().exclude(user=request.user), many=True)
         return success_response(serializer.data)
 
 
@@ -36,7 +36,7 @@ class AdvertismentChanges(generics.ListAPIView, generics.UpdateAPIView, generics
         return success_response(serializer.data)
 
     def put(self, request, *args, **kwargs):
-        instance = generics.get_object_or_404( AdvertismentSerializer, id=kwargs['id'])
+        instance = generics.get_object_or_404(AdvertisementSerializer, id=kwargs['id'])
         serializer = self.get_serializer(instance=instance, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -44,7 +44,7 @@ class AdvertismentChanges(generics.ListAPIView, generics.UpdateAPIView, generics
         return bad_request_response(serializer.errors)
 
     def delete(self, request, *args, **kwargs):
-        instance = generics.get_object_or_404(  AdvertismentSerializer , id=kwargs['id'])
+        instance = generics.get_object_or_404(AdvertisementSerializer , id=kwargs['id'])
         instance.delete()
         return empty_response()
 
