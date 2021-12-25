@@ -4,8 +4,11 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.conf import settings
+from services.newsletterdata import generateNewsData
 from services.utility import EmaiLVerIficationTokenGenerator
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, send_mail
+
+from TaiyoInfo.models import NewsLetter
 
 User = get_user_model()
 generate_token = EmaiLVerIficationTokenGenerator()
@@ -28,3 +31,22 @@ def send_activation_email(user, request):
     )
 
     email.send()
+
+
+
+def sendNewsEmail(email):
+    response = generateNewsData()
+    msg_html = render_to_string('email/email.html', {'data': response})
+    send_mail(
+        'Taiyo : NewsLetter',
+        msg_html,
+        "taiyo.apex@gmail.com",
+        [email],
+        html_message=msg_html,
+    )
+
+
+def send_newsletter():
+    users = NewsLetter.objects.all()
+    for user in users:
+        sendNewsEmail(user.email)

@@ -18,22 +18,6 @@ def send_email(subject, message, to):
     )
 
 
-
-def sendNewsEmail(email):
-    response = generateNewsData()
-    print(response)
-    msg_html = render_to_string('email/email.html', {'data': response})
-    send_mail(
-        'Taiyo : NewsLetter',
-        msg_html,
-        "taiyo.apex@gmail.com",
-        [email],
-        html_message=msg_html,
-    )
-
-
-
-
 def sendContactEmail(response):
     msg_html = render_to_string('email/contact.html', {'data': response})
     send_mail(
@@ -43,8 +27,6 @@ def sendContactEmail(response):
         ['taiyo.apex@gmail.com'],
         html_message=msg_html,
     )
-
-
 
 
 def sendOtpEmail(token, email):
