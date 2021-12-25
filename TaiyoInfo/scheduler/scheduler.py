@@ -11,7 +11,7 @@ token = secrets.token_urlsafe(20)
 def start():
     scheduler = BackgroundScheduler()
     scheduler.add_jobstore(DjangoJobStore(), 'Newsletterdefault') 
-    scheduler.add_job(func=send_newsletter, id=f"Newsletter {token}", trigger='interval', minutes=10, name='newsletter', jobstore='Newsletterdefault')
+    scheduler.add_job(func=send_newsletter, id=f"Newsletter {token}", trigger='interval', days=7, name='newsletter', jobstore='Newsletterdefault')
     register_events(scheduler)
     scheduler.start()
     print('Newsletter Started!!!!', file=sys.stdout)
