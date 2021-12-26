@@ -59,7 +59,7 @@ class Token(models.Model):
     destroy_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
 
@@ -70,6 +70,6 @@ class Notification(models.Model):
     create_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
