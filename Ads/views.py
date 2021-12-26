@@ -19,8 +19,6 @@ class AdvertismentView(generics.RetrieveAPIView):
 class AdvertisementPostView(generics.RetrieveAPIView):
     serializer_class = AdvertisementSerializer
 
-
-
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
@@ -74,8 +72,11 @@ class BidChanges(generics.ListAPIView, generics.UpdateAPIView, generics.DestroyA
         return success_response(serializer.data)
 
     def put(self, request, *args, **kwargs):
-        bid = generics.get_object_or_404(BidSerializer, id=kwargs['id'])
-        serializer = self.get_serializer(instance=bid, data=request.data)
+        try:
+            bid = Bid.objects.get(id=kwargs['id'])
+            serializer = self.get_serializer(bid, data=request.data)
+        except Exception:
+            return bad_request_response({"message": "bid not exist"})
         if serializer.is_valid():
             serializer.save()
             return success_response(serializer.data)
