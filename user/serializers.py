@@ -111,7 +111,8 @@ class UserSerializer(serializers.ModelSerializer):
             "company_country",
             "company_pin_code",
             "last_login",
-            "date_joined"
+            "date_joined",
+            "friends"
         ]
         read_only_fields = ["id", "last_login", "date_joined", "email"]
 
