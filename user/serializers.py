@@ -96,18 +96,8 @@ class FriendUserSerializer(serializers.ModelSerializer):
             "last_name",
             "email",
             "image",
-            "phone_number",
-            "company_name",
-            "company_type",
-            "company_address",
-            "company_city",
-            "company_state",
-            "company_country",
-            "company_pin_code",
+            "phone_number"
         ]
-
-
-
 
 class UserSerializer(serializers.ModelSerializer):
     friends = FriendUserSerializer(many=True)
