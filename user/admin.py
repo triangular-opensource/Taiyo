@@ -1,11 +1,54 @@
+import csv
+
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.http import HttpResponse, HttpResponseForbidden
 from rest_framework.authtoken.models import Token, TokenProxy
 
 from user.models import Token, User , Notification
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
+
+
+    @admin.action(description="download csv")
+    def download_csv(modeladmin, request, queryset):
+        try:
+            response = HttpResponse(content_type='text/csv')
+            response['Content-Disposition'] = f'attachment; filename="user.csv"'
+
+            writer = csv.writer(response)
+            writer.writerow([])
+            writer.writerow([
+            "id",
+            "first_name",
+            "middle_name",
+            "last_name",
+            "email",
+            "image",
+            "gst_number",
+            "phone_number",
+            "user_type",
+            "package_type",
+            "package_expiry",
+            "company_name",
+            "company_type",
+            "company_address",
+            "company_city",
+            "company_state",
+            "company_country",
+            "company_pin_code",
+            "last_login",
+            "date_joined"
+            ])
+            for s in queryset:
+                writer.writerow([s.name, s.email, s.phone_number])
+            return response
+        except Exception as err:
+            return HttpResponseForbidden("<h1>403 Not Authorized</h1>")
+
+
+
     model = User
     ordering = ["id"]
     list_display = ['id', "email", "first_name", "last_name", "phone_number", "user_type", "is_staff"]
