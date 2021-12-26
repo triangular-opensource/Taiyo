@@ -11,7 +11,7 @@ class AdvertismentView(generics.RetrieveAPIView):
     serializer_class = AdvertisementViewSerializer
 
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Advertisement.objects.all().order_by("-timestamp"), many=True)
+        serializer = self.get_serializer(Advertisement.objects.all().order_by("-id"), many=True)
         return success_response(serializer.data)
 
 
