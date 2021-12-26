@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.fields import ReadOnlyField
 
 from Ads.models import *
 
@@ -19,6 +20,8 @@ class AdvertisementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Advertisement
         fields = "__all__"
+        read_only_field = "image_1"
+
 
 class BidSerializer(serializers.ModelSerializer):
     class Meta:
