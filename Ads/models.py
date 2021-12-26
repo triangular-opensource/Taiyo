@@ -39,6 +39,7 @@ class Advertisement(models.Model):
     product_description = models.TextField()
     bidding = models.BooleanField(default=True)
     bidding_close_date = models.DateTimeField(default=timezone.now)
+    selected_bid = models.ForeignKey('Ads.Bid', on_delete=models.DO_NOTHING, null=True, blank=True, related_name="winning_bid")
     author_name = models.CharField(max_length=40)
     author_mobile_number = models.CharField(max_length=10, validators=[validate_phone_number])
     author_country = models.CharField(max_length=20)

@@ -3,13 +3,12 @@ import csv
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.http import HttpResponse, HttpResponseForbidden
-from rest_framework.authtoken.models import Token, TokenProxy
+from rest_framework.authtoken.models import TokenProxy
 
 from user.models import Token, User , Notification
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-
 
     @admin.action(description="download csv")
     def download_csv(modeladmin, request, queryset):

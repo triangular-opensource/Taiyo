@@ -1,9 +1,5 @@
 from django.contrib import admin
-from django.http import HttpResponse, HttpResponseForbidden
-
 from .models import GeneralInfo, Addres, Policy, NewsLetter , Category , Product , Subscription , Contact
-import csv
-
 
 
 @admin.register(GeneralInfo)
@@ -64,32 +60,13 @@ admin.site.register(Category)
 admin.site.register(Product)
 
 
-
 @admin.register(Contact)
 class Constactdmin(admin.ModelAdmin):
     list_display = ['id', 'name','email' , 'subject']
     list_display_links = ['id', 'name' , 'email' , 'subject']
 
 
-
 @admin.register(Subscription)
 class SubscriptionAdmin(admin.ModelAdmin):
     list_display = ['name','amount','days']
     list_display_links = ['name','amount','days']
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

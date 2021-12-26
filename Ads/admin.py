@@ -37,14 +37,13 @@ class AdAdmin(admin.ModelAdmin):
                 "coating_in_gsm",
             )
         }),
-
         ("Bidding Data", {
             "fields": (
                 "bidding",
-                "bidding_close_date"
+                "bidding_close_date",
+                "selected_bid"
             )
         }),
-
         ("Files", {
             "fields": (
                 "image_1",
@@ -75,5 +74,11 @@ class AdAdmin(admin.ModelAdmin):
         })
     )
 
+
+class BidAdmin(admin.ModelAdmin):
+    list_display = ['id', 'amount', 'user', 'advertisement', 'selected']
+    list_display_links = ['id', 'amount']
+    list_filter = ['advertisement', 'selected']
+
 admin.site.register(Advertisement, AdAdmin)
-admin.site.register(Bid)
+admin.site.register(Bid, BidAdmin)
