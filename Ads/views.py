@@ -76,7 +76,7 @@ class BidChanges(generics.ListAPIView, generics.UpdateAPIView, generics.DestroyA
     def put(self, request, *args, **kwargs):
         try:
             bid = Bid.objects.get(id=kwargs['id'])
-            serializer = self.get_serializer(bid, data=request.data)
+            serializer = self.get_serializer(instance=bid, data=request.data)
         except Exception:
             return bad_request_response({"message": "bid not exist"})
         if serializer.is_valid():
