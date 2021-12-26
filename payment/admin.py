@@ -1,7 +1,7 @@
 import csv
 
 from django.contrib import admin
-from django.http import HttpResponseForbidden, HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 
 from payment.models import Payment
 
@@ -32,13 +32,18 @@ class PaymentAdmin(admin.ModelAdmin):
             return HttpResponseForbidden("<h1>403 Not Authorized</h1>")
 
 
-list_display = ['id', 'user', 'amount', 'paid']
+
+
+
+
+
+    list_display = ['id', 'user', 'amount', 'paid']
     list_display_links = ['id', 'user']
     search_fields = list_display
     list_filter = ['paid']
     fieldsets = (
         (
-            None, 
+            None,
             {
                 "fields": ["user", "amount", "paid"],
             }
@@ -57,4 +62,3 @@ list_display = ['id', 'user', 'amount', 'paid']
         ),
     )
     readonly_fields = ("timestamp",)
-    
