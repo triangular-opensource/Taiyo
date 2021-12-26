@@ -36,8 +36,11 @@ class AdvertismentChanges(generics.ListAPIView, generics.UpdateAPIView, generics
         return success_response(serializer.data)
 
     def put(self, request, *args, **kwargs):
-        instance = generics.get_object_or_404(AdvertisementSerializer, id=kwargs['id'])
-        serializer = self.get_serializer(instance=instance, data=request.data)
+        try:
+            instance = Advertisement.objects.get(id=kwargs['id'])
+            serializer = self.get_serializer(instance=instance, data=request.data)
+        except Exception:
+            return bad_request_response({"message": "ad not exist"})
         if serializer.is_valid():
             serializer.save()
             return success_response(serializer.data)
