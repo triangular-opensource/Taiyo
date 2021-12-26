@@ -3,6 +3,7 @@ import re
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
+from user.models import Notification
 
 class RegisterSerializer(serializers.Serializer):
 
@@ -115,6 +116,16 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "last_login", "date_joined", "email"]
 
 
+
+
+class NotificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = ['id',
+                  'heading',
+                  'text',
+                  'user',
+                  'create_time']
 
 
 

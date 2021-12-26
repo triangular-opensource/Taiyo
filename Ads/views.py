@@ -19,6 +19,8 @@ class AdvertismentView(generics.RetrieveAPIView):
 class AdvertisementPostView(generics.RetrieveAPIView):
     serializer_class = AdvertisementSerializer
 
+
+
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():

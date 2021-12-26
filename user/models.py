@@ -50,3 +50,26 @@ class Token(models.Model):
         if self.create_time:
             self.destroy_time = self.create_time + timedelta(minutes=3)
         super(Token, self).save(*args, **kwargs)
+
+
+class Token(models.Model):
+    token = models.CharField(max_length=7 , blank=False , null = False)
+    email = models.EmailField(null=False)
+    create_time = models.DateTimeField(auto_now=True)
+    destroy_time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.id
+
+
+
+class Notification(models.Model):
+    heading = models.CharField(max_length=300)
+    text = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    create_time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.id
+
+

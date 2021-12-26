@@ -161,3 +161,17 @@ class UserProfileView(generics.RetrieveAPIView, generics.UpdateAPIView):
             serializer.save()
             return success_response(serializer.data)
         return bad_request_response(serializer.errors)
+
+
+
+
+
+
+@permission_classes((IsAuthenticated, ))
+class NotificationView(generics.RetrieveAPIView, generics.UpdateAPIView):
+    serializer_class = NotificationSerializer
+    def get(self, request, *args, **kwargs):
+        serializer = self.get_serializer(Notification.objects.all().filter(user=request.user), many=True)
+        return success_response(serializer.data)
+
+

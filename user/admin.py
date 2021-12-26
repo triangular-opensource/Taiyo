@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from rest_framework.authtoken.models import Token, TokenProxy
 
-from user.models import Token, User
+from user.models import Token, User , Notification
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
@@ -46,3 +46,4 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.unregister(TokenProxy)
+admin.site.register(Notification)
