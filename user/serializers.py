@@ -87,8 +87,30 @@ class ResetPasswordSerializer(serializers.Serializer):
         fields = ['email']
 
 
+class FriendUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            "first_name",
+            "middle_name",
+            "last_name",
+            "email",
+            "image",
+            "phone_number",
+            "company_name",
+            "company_type",
+            "company_address",
+            "company_city",
+            "company_state",
+            "company_country",
+            "company_pin_code",
+        ]
+
+
+
 
 class UserSerializer(serializers.ModelSerializer):
+    friends = FriendUserSerializer(many=True)
     class Meta:
         model = User
         fields = [
@@ -126,7 +148,8 @@ class NotificationSerializer(serializers.ModelSerializer):
                   'heading',
                   'text',
                   'user',
-                  'create_time']
+                  'create_time'
+                  ]
 
 
 
