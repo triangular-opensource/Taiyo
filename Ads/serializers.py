@@ -17,6 +17,7 @@ class AdvertisementViewSerializer(serializers.ModelSerializer):
                   'basic_price']
 
 class AdvertisementSerializer(serializers.ModelSerializer):
+    image_1 = serializers.FileField(required=False)
     class Meta:
         model = Advertisement
         fields = "__all__"
