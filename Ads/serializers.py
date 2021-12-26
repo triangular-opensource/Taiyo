@@ -14,6 +14,7 @@ class AdvertisementViewSerializer(serializers.ModelSerializer):
                   'author_business_address',
                   'author_country',
                   'buy_or_sell',
+                  'bidding_close_date',
                   'basic_price']
 
 class AdvertisementSerializer(serializers.ModelSerializer):
