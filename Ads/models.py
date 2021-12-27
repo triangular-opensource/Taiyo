@@ -38,7 +38,7 @@ class Advertisement(models.Model):
     coating_in_gsm = models.CharField(max_length=30)
     product_description = models.TextField()
     bidding = models.BooleanField(default=True)
-    bidding_close_date = models.DateTimeField(default=timezone.now)
+    bidding_close_date = models.DateTimeField(default=(timezone.now() + timedelta(days=15)))
     selected_bid = models.ForeignKey('Ads.Bid', on_delete=models.DO_NOTHING, null=True, blank=True, related_name="winning_bid")
     author_name = models.CharField(max_length=40)
     author_mobile_number = models.CharField(max_length=10, validators=[validate_phone_number])
@@ -72,10 +72,6 @@ class Advertisement(models.Model):
             return mark_safe(f'<img src="{self.image_4_link}" width="auto" height="150px" />')
         return mark_safe('<span id="image_4_display">No image selected!</span>')
 
-    def save(self, *args, **kwargs):
-        if self.bidding_close_date:
-            self.bidding_close_date = self.bidding_close_date + timedelta(days=15)
-        super(Advertisement, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"#{self.id}"

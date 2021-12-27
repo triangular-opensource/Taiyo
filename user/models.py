@@ -52,14 +52,7 @@ class Token(models.Model):
         super(Token, self).save(*args, **kwargs)
 
 
-class Token(models.Model):
-    token = models.CharField(max_length=7 , blank=False , null = False)
-    email = models.EmailField(null=False)
-    create_time = models.DateTimeField(auto_now=True)
-    destroy_time = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return str(self.id)
 
 
 
