@@ -44,7 +44,7 @@ class Advertisement(models.Model):
     author_mobile_number = models.CharField(max_length=10, validators=[validate_phone_number])
     author_country = models.CharField(max_length=20)
     author_business_address = models.CharField(max_length=100)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="created_by", null=True)
 
     timestamp = models.DateTimeField(auto_now=True)
 
