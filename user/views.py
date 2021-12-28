@@ -2,16 +2,13 @@ import math
 import random
 
 from django.http.response import JsonResponse
-from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
+from django.shortcuts import get_object_or_404, redirect
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 
 from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import permission_classes
-from TaiyoInfo.models import Subscription
-from services.mailing import send_email
 
 from user.serializers import *
 from services.functions import send_activation_email
@@ -20,6 +17,8 @@ from services.utility import *
 from .models import *
 from django.contrib.auth import get_user_model
 from services.mailing import sendOtpEmail
+
+from django.conf import settings
 
 User = get_user_model()
 generate_token = EmaiLVerIficationTokenGenerator()
@@ -144,8 +143,8 @@ def activate_user(request, uidb64, token):
     
     if user and generate_token.check_token(user, token):
         User.objects.filter(id=uid).update(is_active = True)
-        return redirect(reverse("login"))
-    return JsonResponse({'Message': "Account activation failed"})
+        return redirect(f"{settings.FRONTEND_URL}/register-success")
+    return redirect(f"{settings.FRONTEND_URL}/register-failure")
 
 
 @permission_classes((IsAuthenticated, ))

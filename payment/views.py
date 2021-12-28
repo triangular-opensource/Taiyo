@@ -1,4 +1,6 @@
 import json
+from django.conf import settings
+from django.shortcuts import redirect
 
 from rest_framework.permissions import IsAuthenticated
 import razorpay
@@ -81,6 +83,6 @@ class SuccessPayment(generics.CreateAPIView):
             #     subscribed = True
             # )
             
-            return success_response({"message": "success"})
+            return redirect(f"{settings.FRONTEND_URL}/package-history")
         else:
-            return bad_request_response({"message": "failure"})
+            return redirect(f"{settings.FRONTEND_URL}/package-history")
