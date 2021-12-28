@@ -52,6 +52,10 @@ class RegisterSerializer(serializers.Serializer):
         if not (re.fullmatch(regex, value)):
             return False
         return True
+    
+    def get_validation_exclusions(self):
+        exclusions = super(RegisterSerializer, self).get_validation_exclusions()
+        return exclusions + ['middle_name']
 
 
 class LoginSerializer(serializers.Serializer):
