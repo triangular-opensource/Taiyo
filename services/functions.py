@@ -24,10 +24,11 @@ def send_activation_email(user, request):
     })
 
     send_mail(
-        subject=subject,
-        body=body,
-        from_email=settings.EMAIL_HOST_USER,
-        to=[user.email]
+        subject,
+        body,
+        settings.EMAIL_HOST_USER,
+        [user.email],
+        html_message=body
     )
 
 def sendNewsEmail(email):
