@@ -23,16 +23,12 @@ def send_activation_email(user, request):
         "token": generate_token.make_token(user)
     })
 
-    email = EmailMessage(
+    send_mail(
         subject=subject,
         body=body,
         from_email=settings.EMAIL_HOST_USER,
         to=[user.email]
     )
-
-    email.send()
-
-
 
 def sendNewsEmail(email):
     response = generateNewsData()
@@ -44,7 +40,6 @@ def sendNewsEmail(email):
         [email],
         html_message=msg_html,
     )
-
 
 def send_newsletter():
     users = NewsLetter.objects.all()
