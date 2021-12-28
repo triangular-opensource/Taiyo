@@ -10,6 +10,7 @@ from django.utils.http import urlsafe_base64_decode
 from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import permission_classes
+from TaiyoInfo.models import Subscription
 from services.mailing import send_email
 
 from user.serializers import *
@@ -163,10 +164,6 @@ class UserProfileView(generics.RetrieveAPIView, generics.UpdateAPIView):
         return bad_request_response(serializer.errors)
 
 
-
-
-
-
 @permission_classes((IsAuthenticated, ))
 class NotificationView(generics.RetrieveAPIView, generics.UpdateAPIView):
     serializer_class = NotificationSerializer
@@ -175,3 +172,9 @@ class NotificationView(generics.RetrieveAPIView, generics.UpdateAPIView):
         return success_response(serializer.data)
 
 
+@permission_classes((IsAuthenticated,))
+class PaymentHistoryView(generics.ListAPIView):
+    serializer_class = PaymentHistorySerializer
+    def get(self, request, *args, **kwargs):
+        serializer = self.get_serializer(Payment.objects.filter(user=request.user), many=True)
+        return success_response(serializer.data)

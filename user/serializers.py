@@ -1,9 +1,13 @@
 from rest_framework import serializers
 import re
 from django.contrib.auth import get_user_model
+from TaiyoInfo.models import Subscription
+
+from user.models import Notification
+from payment.models import Payment
+from services.serializers import ForeignKeyField
 
 User = get_user_model()
-from user.models import Notification
 
 class RegisterSerializer(serializers.Serializer):
 
@@ -50,8 +54,6 @@ class RegisterSerializer(serializers.Serializer):
         return True
 
 
-
-
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(required=True, max_length=75)
     password = serializers.CharField(required=True, max_length=50)
@@ -62,7 +64,6 @@ class LoginSerializer(serializers.Serializer):
     @classmethod
     def validate_email(cls, value):
         return value.lower()
-
 
 
 class ChangePasswordSerializer(serializers.Serializer):
@@ -129,8 +130,6 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "last_login", "date_joined", "email"]
 
 
-
-
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
@@ -142,4 +141,14 @@ class NotificationSerializer(serializers.ModelSerializer):
                   ]
 
 
-
+class PaymentHistorySerializer(serializers.ModelSerializer):
+    package = ForeignKeyField(queryset=Subscription.objects, filter_by='name') 
+    class Meta:
+        model = Payment
+        fields = [
+            "id",
+            "package",
+            "paid",
+            "amount",
+            "timestamp"
+        ]

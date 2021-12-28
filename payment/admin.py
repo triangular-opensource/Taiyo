@@ -7,7 +7,7 @@ from payment.models import Payment
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'amount', 'paid']
+    list_display = ['id', 'user', 'amount', 'package', 'paid']
     list_display_links = ['id', 'user']
     search_fields = list_display
     list_filter = ['paid']
@@ -15,7 +15,7 @@ class PaymentAdmin(admin.ModelAdmin):
         (
             None,
             {
-                "fields": ["user", "amount", "paid"],
+                "fields": ["user", "amount", "package", "paid"],
             }
         ),
         (

@@ -9,5 +9,6 @@ urlpatterns = [
     path('change-password', ChangePasswordView.as_view(), name='change-password'),
     path('reset-password', ResetPasswordTokenView.as_view(), name='reset-password'),
     path('reset-password-token/<str:email>', RPTChangeView.as_view(), name='reset-password-token'),
-    path('notification', NotificationView.as_view(), name='notifications')
+    path('notification', NotificationView.as_view(), name='notifications'),
+    path('payment-history', PaymentHistoryView.as_view(), name='payment-history'),
 ]
