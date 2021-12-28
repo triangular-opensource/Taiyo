@@ -12,7 +12,7 @@ User = get_user_model()
 class RegisterSerializer(serializers.Serializer):
 
     first_name = serializers.CharField(required=True, max_length=75)
-    middle_name = serializers.CharField(required=False, max_length=30)
+    middle_name = serializers.CharField(allow_blank=True, allow_null=True, max_length=30)
     last_name = serializers.CharField(required=True, max_length=75)
     gst_number = serializers.CharField(required= True,max_length=16)
     phone_number = serializers.CharField(required=True, max_length=16)
@@ -44,7 +44,6 @@ class RegisterSerializer(serializers.Serializer):
             'company_country',
             'company_pin_code',
         ]
-        optional_fields = ['middle_name',]
 
     @classmethod
     def validate_email(cls, value):
@@ -52,10 +51,6 @@ class RegisterSerializer(serializers.Serializer):
         if not (re.fullmatch(regex, value)):
             return False
         return True
-    
-    def get_validation_exclusions(self):
-        exclusions = super(RegisterSerializer, self).get_validation_exclusions()
-        return exclusions + ['middle_name']
 
 
 class LoginSerializer(serializers.Serializer):
