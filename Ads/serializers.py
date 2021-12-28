@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework.fields import ReadOnlyField
 
 from Ads.models import *
+from services.serializers import ForeignKeyField
 
 
 class AdvertisementViewSerializer(serializers.ModelSerializer):
@@ -19,6 +20,7 @@ class AdvertisementViewSerializer(serializers.ModelSerializer):
 
 class AdvertisementSerializer(serializers.ModelSerializer):
     image_1 = serializers.FileField(required=False)
+    product = ForeignKeyField(queryset=Product.objects, filter_by="name")
     class Meta:
         model = Advertisement
         fields = "__all__"
