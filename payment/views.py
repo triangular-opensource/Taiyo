@@ -26,7 +26,7 @@ class GetBillingUserData(generics.CreateAPIView):
         data = request.data
         amount = int(data.get("amount"))
         order = client.order.create({"amount":amount*100, "currency":"INR"})
-        order = Payment(user=request.user, amount=amount, order_id=order['id'])
+        order = Payment(user=request.user, amount=amount, order_id=order['id'], package=data.get("package"))
         order.save()
         return success_response({"data": model_to_dict(order)})
 
