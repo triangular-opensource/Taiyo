@@ -32,26 +32,21 @@ class PaymentAdmin(admin.ModelAdmin):
         ),
     )
     readonly_fields = ("timestamp",)
-    
+
     @admin.action(description="download csv")
     def download_csv(modeladmin, request, queryset):
         try:
             response = HttpResponse(content_type='text/csv')
-            response['Content-Disposition'] = f'attachment; filename="payment.csv"'
+            response['Content-Disposition'] = f'attachment; filename="user.csv"'
 
             writer = csv.writer(response)
             writer.writerow([])
-            writer.writerow([
-            'user' 
-            'amount',
-            'order_id',
-            'payment_id',
-            'payment_signature',
-            'timestamp',
-            'paid'
-            ])
+            writer.writerow(['id', 'user', 'amount', 'order_id', 'payment_id', 'package', 'paid', 'timestamp'])
             for s in queryset:
-                writer.writerow([s.name, s.email, s.phone_number])
+                writer.writerow([s.id, s.user, s.amount, s.order_id, s.payment_id, s.package, s.paid,s.timestamp])
             return response
         except Exception as err:
             return HttpResponseForbidden("<h1>403 Not Authorized</h1>")
+
+    actions = [download_csv]
+    

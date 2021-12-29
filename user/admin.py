@@ -19,35 +19,55 @@ class UserAdmin(BaseUserAdmin):
             writer = csv.writer(response)
             writer.writerow([])
             writer.writerow([
-            "id",
-            "first_name",
-            "middle_name",
-            "last_name",
-            "email",
-            "image",
-            "gst_number",
-            "phone_number",
-            "user_type",
-            "package_type",
-            "package_expiry",
-            "company_name",
-            "company_type",
-            "company_address",
-            "company_city",
-            "company_state",
-            "company_country",
-            "company_pin_code",
-            "last_login",
-            "date_joined"
+                "id",
+                "first_name",
+                "middle_name",
+                "last_name",
+                "email",
+                "image",
+                "gst_number",
+                "phone_number",
+                "user_type",
+                "package_type",
+                "package_expiry",
+                "company_name",
+                "company_type",
+                "company_address",
+                "company_city",
+                "company_state",
+                "company_country",
+                "company_pin_code",
+                "last_login",
+                "date_joined"
             ])
             for s in queryset:
-                writer.writerow([s.name, s.email, s.phone_number])
+                writer.writerow([
+                    s.id,
+                    s.first_name,
+                    s.middle_name,
+                    s.last_name,
+                    s.email,
+                    s.image,
+                    s.gst_number,
+                    s.phone_number,
+                    s.user_type,
+                    s.package_type,
+                    s.package_expiry,
+                    s.company_name,
+                    s.company_type,
+                    s.company_address,
+                    s.company_city,
+                    s.company_state,
+                    s.company_country,
+                    s.company_pin_code,
+                    s.last_login,
+                    s.date_joined
+                ])
             return response
         except Exception as err:
             return HttpResponseForbidden("<h1>403 Not Authorized</h1>")
 
-
-
+    actions = [download_csv]
     model = User
     ordering = ["id"]
     list_display = ['id', "email", "first_name", "last_name", "phone_number", "user_type", "is_staff"]
