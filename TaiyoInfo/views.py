@@ -2,16 +2,17 @@ from django.shortcuts import redirect
 from rest_framework import generics
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
+from django.utils import timezone
 
 from TaiyoInfo.serializers import CategorySerializer, GeneralInfoSerializer, PolicySerializer, AddresSerializer, NewsLetterSerializer, ProductSerializer , SubscriptionSerializer , ContactSerializer
-
+from services.functions import sendNewsEmail
 
 from services.response import success_response, bad_request_response
 from services.mailing import *
 
 
 from TaiyoInfo.models import Category, GeneralInfo, NewsLetter, Addres , Policy, Product , Subscription , Contact
-
+from user.models import Notification
 
 
 @permission_classes((AllowAny, ))

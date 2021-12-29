@@ -6,6 +6,9 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import permission_classes
 from django.utils import timezone
 
+from user.models import Notification
+
+
 @permission_classes((AllowAny,))
 class AdvertismentView(generics.RetrieveAPIView):
     serializer_class = AdvertisementViewSerializer
@@ -107,6 +110,6 @@ class BidChanges(generics.ListAPIView, generics.UpdateAPIView, generics.DestroyA
         return bad_request_response(serializer.errors)
 
     def delete(self, request, *args, **kwargs):
-        instance = generics.get_object_or_404(  BidSerializer ,   advertisement =kwargs['id'])
+        instance = generics.get_object_or_404(BidSerializer,advertisement=kwargs['id'])
         instance.delete()
         return empty_response()

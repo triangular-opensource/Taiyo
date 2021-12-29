@@ -30,8 +30,6 @@ def send_activation_email(user, request):
         to=[user.email]
     )
 
-    email.send()
-
 
 
 def sendNewsEmail(email):

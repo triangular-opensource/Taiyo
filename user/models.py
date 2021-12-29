@@ -9,7 +9,7 @@ from services.validators import validate_gst_number, validate_phone_number, vali
 
 class User(AbstractUser):
     first_name = models.CharField(max_length=30)
-    middle_name = models.CharField(max_length=30, blank=True, null=True)
+    middle_name = models.CharField(max_length=30, blank=True , null=True,default="")
     last_name = models.CharField(max_length=30)
     image = models.URLField(blank=True, null=True, max_length=255)
     gst_number = models.CharField(max_length=15, validators=[validate_gst_number])
@@ -64,5 +64,8 @@ class Notification(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+
 
 
