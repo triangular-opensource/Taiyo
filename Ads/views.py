@@ -5,6 +5,7 @@ from Ads.models import Advertisement, Bid
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import permission_classes
 from django.utils import timezone
+from user.models import Notification
 
 @permission_classes((AllowAny,))
 class AdvertismentView(generics.RetrieveAPIView):
@@ -83,8 +84,15 @@ class BidView(generics.RetrieveAPIView):
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
+        notify_user = Advertisement.objects.get(id=request.data['advertisement']).user
+        notify = Notification(
+            heading="New Bid Created",
+            text=f"Rs. {request.data['amount']} bidded by #{request.user.id}",
+            user=notify_user
+        )
+        notify.save()
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(user=request.user)
             return success_response(serializer.data)
         return bad_request_response(serializer.errors)
 
