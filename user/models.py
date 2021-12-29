@@ -11,7 +11,7 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=30)
     middle_name = models.CharField(max_length=30, default="", blank=True, null=True)
     last_name = models.CharField(max_length=30)
-    image = models.URLField(blank=True, null=True, max_length=255)
+    image = models.URLField(blank=True, default="https://firebasestorage.googleapis.com/v0/b/taiyo-768b4.appspot.com/o/Users%2Fdefault.png?alt=media&token=4fdd5a7a-cb6c-41c5-bcfc-5b95352a64bf", null=True, max_length=255)
     gst_number = models.CharField(max_length=15, validators=[validate_gst_number])
     phone_number = models.CharField(max_length=10, validators=[validate_phone_number])
 

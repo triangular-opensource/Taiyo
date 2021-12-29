@@ -7,6 +7,7 @@ from django.utils.html import mark_safe
 from services.constant import AD_QUALITY, AD_TEMPER,  BUY_OR_SELL
 from TaiyoInfo.models import Product
 from services.validators import validate_phone_number
+from django.core.validators import MinValueValidator
 
 User = get_user_model()
 
@@ -14,7 +15,7 @@ User = get_user_model()
 class Advertisement(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     buy_or_sell = models.CharField(max_length=4, choices=BUY_OR_SELL)
-    basic_price = models.FloatField()
+    basic_price = models.FloatField(validators=[MinValueValidator(9999)])
     excel_file = models.FileField(null=True, blank=True)
     excel_file_link = models.URLField(max_length=300, null=True, blank=True)
     pdf_file = models.FileField(null=True, blank=True)
@@ -78,7 +79,7 @@ class Advertisement(models.Model):
 
 
 class Bid(models.Model):
-    amount = models.IntegerField()
+    amount = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, null=True)
     selected = models.BooleanField(default=False)
