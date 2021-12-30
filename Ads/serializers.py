@@ -21,13 +21,12 @@ class AdvertisementViewSerializer(serializers.ModelSerializer):
 class AdvertisementSerializer(serializers.ModelSerializer):
     image_1 = serializers.FileField(required=False)
     product = ForeignKeyField(queryset=Product.objects, filter_by="name")
-    selected_bid = ForeignKeyField(queryset=Bid.objects, filter_by="amount")
-    selected_bid_amount = serializers.CharField(source="selected_bid.amount", allow_null=True)
-    user__first_name = serializers.CharField(source="selected_bid.user.first_name", allow_null=True)
-    user__middle_name = serializers.CharField(source="selected_bid.user.middle_name", allow_null=True)
-    user__last_name = serializers.CharField(source="selected_bid.user.last_name", allow_null=True)
-    user__email = serializers.CharField(source="selected_bid.user.email", allow_null=True)
-    user__phone_number = serializers.CharField(source="selected_bid.user.phone_number", allow_null=True)
+    selected_bid_amount = serializers.CharField(source="selected_bid.amount", allow_null=True, allow_blank=True)
+    user__first_name = serializers.CharField(source="selected_bid.user.first_name", allow_null=True, allow_blank=True)
+    user__middle_name = serializers.CharField(source="selected_bid.user.middle_name", allow_null=True, allow_blank=True)
+    user__last_name = serializers.CharField(source="selected_bid.user.last_name", allow_null=True, allow_blank=True)
+    user__email = serializers.CharField(source="selected_bid.user.email", allow_null=True, allow_blank=True)
+    user__phone_number = serializers.CharField(source="selected_bid.user.phone_number", allow_null=True, allow_blank=True)
     class Meta:
         model = Advertisement
         fields = [
