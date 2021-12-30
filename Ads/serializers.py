@@ -22,12 +22,12 @@ class AdvertisementSerializer(serializers.ModelSerializer):
     image_1 = serializers.FileField(required=False)
     product = ForeignKeyField(queryset=Product.objects, filter_by="name")
     selected_bid = ForeignKeyField(queryset=Bid.objects, filter_by="amount")
-    selected_bid_amount = serializers.CharField(source="selected_bid.amount")
-    user__first_name = serializers.CharField(source="selected_bid.user.first_name")
-    user__middle_name = serializers.CharField(source="selected_bid.user.middle_name")
-    user__last_name = serializers.CharField(source="selected_bid.user.last_name")
-    user__email = serializers.CharField(source="selected_bid.user.email")
-    user__phone_number = serializers.CharField(source="selected_bid.user.phone_number")
+    selected_bid_amount = serializers.CharField(source="selected_bid.amount", allow_null=True)
+    user__first_name = serializers.CharField(source="selected_bid.user.first_name", allow_null=True)
+    user__middle_name = serializers.CharField(source="selected_bid.user.middle_name", allow_null=True)
+    user__last_name = serializers.CharField(source="selected_bid.user.last_name", allow_null=True)
+    user__email = serializers.CharField(source="selected_bid.user.email", allow_null=True)
+    user__phone_number = serializers.CharField(source="selected_bid.user.phone_number", allow_null=True)
     class Meta:
         model = Advertisement
         fields = [
