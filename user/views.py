@@ -175,5 +175,5 @@ class NotificationView(generics.RetrieveAPIView, generics.UpdateAPIView):
 class PaymentHistoryView(generics.ListAPIView):
     serializer_class = PaymentHistorySerializer
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Payment.objects.filter(user=request.user), many=True)
+        serializer = self.get_serializer(Payment.objects.filter(user=request.user).order_by("-timestamp")[:10], many=True)
         return success_response(serializer.data)

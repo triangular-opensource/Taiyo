@@ -79,7 +79,7 @@ class BidView(generics.RetrieveAPIView):
 
     serializer_class = BidSerializer
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Bid.objects.all(), many=True)
+        serializer = self.get_serializer(Bid.objects.all().order_by("id")[:10], many=True)
         return success_response(serializer.data)
 
     def post(self, request, *args, **kwargs):
@@ -100,7 +100,7 @@ class BidView(generics.RetrieveAPIView):
 class BidChanges(generics.ListAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
     serializer_class = BidSerializer
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Bid.objects.filter( advertisement =kwargs['id']) , many = True)
+        serializer = self.get_serializer(Bid.objects.filter(advertisement=kwargs['id']).order_by("-id")[:10] , many = True)
         return success_response(serializer.data)
 
     def put(self, request, *args, **kwargs):
@@ -115,6 +115,6 @@ class BidChanges(generics.ListAPIView, generics.UpdateAPIView, generics.DestroyA
         return bad_request_response(serializer.errors)
 
     def delete(self, request, *args, **kwargs):
-        instance = generics.get_object_or_404(  BidSerializer ,   advertisement =kwargs['id'])
+        instance = generics.get_object_or_404(BidSerializer, advertisement=kwargs['id'])
         instance.delete()
         return empty_response()
