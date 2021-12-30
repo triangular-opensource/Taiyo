@@ -66,6 +66,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             "user__last_name",
             "user__email",
             "user__phone_number",
+            "basic_price",
         ]
         read_only_field = [
             "image_1",
