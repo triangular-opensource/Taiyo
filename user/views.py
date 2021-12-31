@@ -175,7 +175,7 @@ class NotificationChangeView(generics.DestroyAPIView):
     serializer_class = NotificationSerializer
 
     def delete(self, request, *args, **kwargs):
-        instance = generics.get_object_or_404(NotificationSerializer , id=kwargs['id'])
+        instance = Notification.objects.get(id=kwargs["id"], user=request.user)
         instance.delete()
         return empty_response()
 
