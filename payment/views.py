@@ -82,7 +82,7 @@ def success_payment(request):
 
             subscription = Subscription.objects.get(amount=order[0].amount)
             User.objects.filter(email=request.user.email, id=request.user.id).update(
-                pacakge_type = subscription.name,
+                pacakge_type = subscription,
                 package_expiry = request.user.package_expiry + timedelta(days=subscription.days)
             )
             
