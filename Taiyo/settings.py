@@ -185,7 +185,7 @@ EMAIL_HOST_PASSWORD = "Gj@19bg9846"
 
 FRONTEND_URL = "https://taiyo-768b4.web.app"
 
-
+MANAGERS = [("Manoj Mishra", "taiyo.apex@gmail.com"),]
 
 
 django_heroku.settings(locals())
