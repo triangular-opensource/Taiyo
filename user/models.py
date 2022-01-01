@@ -16,7 +16,7 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=10, validators=[validate_phone_number])
 
     user_type = models.CharField(max_length=20)
-    package_type = models.ForeignKey(Subscription,on_delete=models.DO_NOTHING)
+    package_type = models.ForeignKey(Subscription,on_delete=models.DO_NOTHING , null = True)
     package_expiry = models.DateTimeField(default=timezone.now)
 
     company_name = models.CharField(max_length=50)
