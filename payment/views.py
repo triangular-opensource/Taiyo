@@ -59,7 +59,7 @@ def success_payment(request):
                 send_mail(
                     f"Payment Successfully Completed for Rs. {order[0].amount} on Taiyo",
                     f"Thank you for subscribing at Taiyo.\n\nFor confirmation or proof you can contact us at taiyo.apex@gmail.com\n\nWe hope you are enjoying our services\n\nThank You\nRegards Taiyo",
-                    "noreply@taiyoindustries.com",
+                    "taiyo.apex@gmail.com",
                     [order.user.email],
                     fail_silently=False
                 )

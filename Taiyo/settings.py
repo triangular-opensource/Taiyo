@@ -174,7 +174,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'
 
-DEFAULT_FROM_EMAIL = 'noreply@taiyoindustries.com'
+DEFAULT_FROM_EMAIL = 'taiyo.apex@gmail.com'
 SERVER_EMAIL = 'taiyo.apex@gmail.com'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
