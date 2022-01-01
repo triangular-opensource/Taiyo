@@ -83,7 +83,7 @@ def success_payment(request):
             subscription = Subscription.objects.get(amount=int(order[0].amount))
             User.objects.filter(email=order[0].user.email, id=order[0].user.id).update(
                 pacakge_type = subscription,
-                package_expiry = order[0].user.package_expiry + timedelta(days=subscription.days)
+                package_expiry = order[0].user.package_expiry + timedelta(days=int(subscription.days))
             )
             
             return redirect(f"{settings.FRONTEND_URL}/package-history?payment=success")
