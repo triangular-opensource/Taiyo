@@ -15,11 +15,11 @@ class AdvertismentView(generics.RetrieveAPIView):
         if case == 1: #all
             serializer = self.get_serializer(Advertisement.objects.all().order_by("-id"), many=True)
         elif case == 2: #active ads
-            serializer = self.get_serializer(Advertisement.objects.filter(bidding_close_date__gte=timezone.now()).order_by("-id"), many=True)
+            serializer = self.get_serializer(Advertisement.objects.filter(bidding_close_date__gte=timezone.now(), user=request.user).order_by("-id"), many=True)
         elif case == 3: #inactive ads
-            serializer = self.get_serializer(Advertisement.objects.filter(bidding_close_date__lte=timezone.now()).order_by("-id"), many=True)
-        elif case == 4: # selected ads
-            serializer = self.get_serializer(Advertisement.objects.all().exclude(selected_bid=None).order_by("-id"),many=True)
+            serializer = self.get_serializer(Advertisement.objects.filter(bidding_close_date__lte=timezone.now(), user=request.user ).order_by("-id"), many=True)
+        elif case == 4:# selected ads
+            serializer = self.get_serializer(Advertisement.objects.all().exclude(selected_bid=None,user=request.user).order_by("-id"),many=True)
         elif case == 5: # add_type buy
             serializer = self.get_serializer(Advertisement.objects.filter(buy_or_sell='Buy').order_by("-id"), many=True)
         elif case == 6:# add_type_sell
@@ -30,6 +30,8 @@ class AdvertismentView(generics.RetrieveAPIView):
             serializer = self.get_serializer(Advertisement.objects.filter(buy_or_sell='Buy').filter(product__category=int(request.GET['id'])).order_by("-id"), many=True)
         elif case == 9: #category sell
             serializer = self.get_serializer(Advertisement.objects.filter(buy_or_sell='Sell').filter(product__category=int(request.GET['id'])).order_by("-id"), many=True)
+        elif case == 10: #all user  addes
+            serializer = self.get_serializer(Advertisement.objects.filter(user = request.user).order_by("-id"), many=True)
         # elif case == 8:  #location
         #     serializer = self.get_serializer(Advertisement.objects.filter(product__category=request.GET['id']).order_by("-id"), many=True)
         else:

@@ -2,7 +2,7 @@ from datetime import timedelta
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
-
+from TaiyoInfo.models import Subscription
 from services.constant import COMPANY_TYPE
 from services.validators import validate_gst_number, validate_phone_number, validate_pincode
 
@@ -16,7 +16,7 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=10, validators=[validate_phone_number])
 
     user_type = models.CharField(max_length=20)
-    package_type = models.CharField(max_length=10)
+    package_type = models.ForeignKey(Subscription,on_delete=models.DO_NOTHING , null = True)
     package_expiry = models.DateTimeField(default=timezone.now)
 
     company_name = models.CharField(max_length=50)
