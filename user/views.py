@@ -170,10 +170,19 @@ class NotificationView(generics.RetrieveAPIView, generics.UpdateAPIView):
         serializer = self.get_serializer(Notification.objects.all().filter(user=request.user), many=True)
         return success_response(serializer.data)
 
+@permission_classes((IsAuthenticated, ))
+class NotificationChangeView(generics.DestroyAPIView):
+    serializer_class = NotificationSerializer
+
+    def delete(self, request, *args, **kwargs):
+        instance = Notification.objects.get(id=kwargs["id"], user=request.user)
+        instance.delete()
+        return empty_response()
+
 
 @permission_classes((IsAuthenticated,))
 class PaymentHistoryView(generics.ListAPIView):
     serializer_class = PaymentHistorySerializer
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Payment.objects.filter(user=request.user), many=True)
+        serializer = self.get_serializer(Payment.objects.filter(user=request.user).order_by("-timestamp")[:10], many=True)
         return success_response(serializer.data)

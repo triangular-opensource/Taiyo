@@ -9,6 +9,7 @@ from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from rest_framework.decorators import permission_classes
+from rest_framework.views import APIView
 from services.response import bad_request_response, success_response
 from razorpay import client
 
@@ -35,13 +36,11 @@ class GetBillingUserData(generics.CreateAPIView):
         return success_response({"data": model_to_dict(order)})
 
 
-@permission_classes((IsAuthenticated,))
-class SuccessPayment(generics.CreateAPIView):
-    
-    @csrf_exempt
-    def post(self, request, *args, **kwargs):
-        data = request.data
-        order_id = Payment.objects.filter(user=request.user).last().order_id
+@csrf_exempt
+def success_payment(request):    
+    if request.method == "POST":
+        data = request.POST
+        order_id = Payment.objects.filter(order_id=data['razorpay_order_id']).last().order_id
         parameters = {
             "razorpay_order_id": order_id,
             "razorpay_payment_id": data['razorpay_payment_id'],
@@ -50,7 +49,7 @@ class SuccessPayment(generics.CreateAPIView):
         signature = client.utility.verify_payment_signature(parameters=parameters)
         
         if signature is None:
-            order = Payment.objects.filter(user=request.user, order_id=data['razorpay_order_id'])
+            order = Payment.objects.filter(order_id=data['razorpay_order_id'])
             order.update(payment_id=data['razorpay_payment_id'], payment_signature=data['razorpay_signature'], paid=True)
             try:
                 pass
