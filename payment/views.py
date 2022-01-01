@@ -60,11 +60,11 @@ def success_payment(request):
                     f"Payment Successfully Completed for Rs. {order[0].amount} on Taiyo",
                     f"Thank you for subscribing at Taiyo.\n\nFor confirmation or proof you can contact us at taiyo.apex@gmail.com\n\nWe hope you are enjoying our services\n\nThank You\nRegards Taiyo",
                     "noreply@taiyoindustries.com",
-                    [request.user.email],
+                    [order.user.email],
                     fail_silently=False
                 )
                 mail_managers(
-                    f"Payment Recieved of Rs. {order[0].amount} from {request.user.name}",
+                    f"Payment Recieved of Rs. {order[0].amount} from {order.user.name}",
                     f"Please Confirm the payment of Rs. {order[0].amount}.\n\nThank You\nRegards Taiyo",
                     fail_silently=False
                 )
@@ -73,17 +73,17 @@ def success_payment(request):
             
             # TODO: GST Calculation Stuff
 
-            # total_balance = request.user.total_balance
-            # curr_balance = request.user.balance
+            # total_balance = order.user.total_balance
+            # curr_balance = order.user.balance
             # gst = order[0].amount*18/(100 + 18)
             # amount_without_gst = order[0].amount - gst
             # total_balance += amount_without_gst
             # curr_balance += amount_without_gst
 
             subscription = Subscription.objects.get(amount=int(order[0].amount))
-            User.objects.filter(email=request.user.email, id=request.user.id).update(
+            User.objects.filter(email=order.user.email, id=order.user.id).update(
                 pacakge_type = subscription,
-                package_expiry = request.user.package_expiry + timedelta(days=subscription.days)
+                package_expiry = order.user.package_expiry + timedelta(days=subscription.days)
             )
             
             return redirect(f"{settings.FRONTEND_URL}/package-history?payment=success")
