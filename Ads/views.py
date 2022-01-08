@@ -90,7 +90,7 @@ class BidView(generics.RetrieveAPIView):
         ad = Advertisement.objects.get(id=request.data['advertisement'])
         notify = Notification(
             heading="New Bid Created",
-            text=f"Rs. {request.data['amount']} bidded by #{request.user.id}",
+            text=f"Rs. {request.data['amount']} bidded by #{request.user.id} on ad {ad}",
             user=notify_user,
             advertisement=ad
         )
