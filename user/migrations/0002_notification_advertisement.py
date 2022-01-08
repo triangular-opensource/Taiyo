@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='notification',
             name='advertisement',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='Ads.advertisement'),
+            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to='Ads.advertisement'),
             preserve_default=False,
         ),
     ]
