@@ -137,7 +137,7 @@ class NotificationSerializer(serializers.ModelSerializer):
                   'heading',
                   'text',
                   'user',
-                  'create_time'
+                  'create_time',
                   'ad'
                   ]
 
