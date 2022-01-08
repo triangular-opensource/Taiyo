@@ -130,6 +130,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class NotificationSerializer(serializers.ModelSerializer):
+    ad = serializers.CharField(source="advertisement.id")
     class Meta:
         model = Notification
         fields = ['id',
@@ -137,6 +138,7 @@ class NotificationSerializer(serializers.ModelSerializer):
                   'text',
                   'user',
                   'create_time'
+                  'ad'
                   ]
 
 
