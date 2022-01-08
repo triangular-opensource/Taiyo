@@ -87,10 +87,12 @@ class BidView(generics.RetrieveAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         notify_user = Advertisement.objects.get(id=request.data['advertisement']).user
+        ad = Advertisement.objects.get(id=request.data['advertisement'])
         notify = Notification(
             heading="New Bid Created",
             text=f"Rs. {request.data['amount']} bidded by #{request.user.id}",
-            user=notify_user
+            user=notify_user,
+            advertisement=ad
         )
         notify.save()
         if serializer.is_valid():
