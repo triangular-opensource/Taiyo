@@ -57,7 +57,7 @@ class Notification(models.Model):
     text = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     create_time = models.DateTimeField(auto_now=True)
-    advertisement = models.OneToOneField("Ads.Advertisement", on_delete=models.CASCADE)
+    advertisement = models.ForeignKey("Ads.Advertisement", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return str(self.id)
