@@ -54,7 +54,6 @@ CORS_ALLOW_METHODS = [
 ]
 
 INSTALLED_APPS = [
-    'TaiyoInfo.apps.SuitConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,6 +71,7 @@ INSTALLED_APPS = [
     'user',
     'Ads',
     'payment',
+    'features'
 ]
 
 
@@ -172,10 +172,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'
 
+DEFAULT_FROM_EMAIL = 'taiyo.apex@gmail.com'
+SERVER_EMAIL = 'taiyo.apex@gmail.com'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
@@ -183,9 +183,10 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "taiyo.apex@gmail.com"
 EMAIL_HOST_PASSWORD = "Gj@19bg9846"
 
-FRONTEND_URL = "https://taiyo-768b4.web.app"
+# FRONTEND_URL = "https://taiyo-768b4.web.app"
+FRONTEND_URL = "http://localhost:3000"
 
-
+MANAGERS = [("Manoj Mishra", "taiyo.apex@gmail.com"),]
 
 
 django_heroku.settings(locals())

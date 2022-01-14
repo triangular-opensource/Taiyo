@@ -3,14 +3,14 @@ from rest_framework import generics
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 
-from TaiyoInfo.serializers import CategorySerializer, GeneralInfoSerializer, PolicySerializer, AddresSerializer, NewsLetterSerializer, ProductSerializer , SubscriptionSerializer , ContactSerializer
+from TaiyoInfo.serializers import GeneralInfoSerializer, PolicySerializer, AddresSerializer, NewsLetterSerializer, SubscriptionSerializer , ContactSerializer
 from services.functions import sendNewsEmail
 
 from services.response import success_response, bad_request_response
 from services.mailing import *
 
 
-from TaiyoInfo.models import Category, GeneralInfo, NewsLetter, Addres , Policy, Product , Subscription , Contact
+from TaiyoInfo.models import GeneralInfo, NewsLetter, Addres , Policy, Subscription , Contact
 
 
 
@@ -53,42 +53,6 @@ class NewsLetterView(generics.RetrieveAPIView, generics.CreateAPIView):
         return bad_request_response(serializer.errors)
 
 
-@permission_classes((AllowAny, ))
-class CategoryView(generics.RetrieveAPIView):
-    serializer_class = CategorySerializer
-
-    def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Category.objects.all(), many=True)
-        return success_response(serializer.data)
-
-
-@permission_classes((AllowAny, ))
-class ProductView(generics.RetrieveAPIView):
-    serializer_class = ProductSerializer
-    def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Product.objects.all(), many=True)
-        return success_response(serializer.data)
-
-
-
-
-@permission_classes((AllowAny, ))
-class SubscriptionView(generics.RetrieveAPIView):
-    serializer_class = SubscriptionSerializer
-    def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Subscription.objects.all(), many=True)
-        return success_response(serializer.data)
-
-
-
-@permission_classes((AllowAny, ))
-class ProductCategoryView(generics.RetrieveAPIView):
-    serializer_class = ProductSerializer
-    def get(self, request, *args, **kwargs):
-        category = Category.objects.get(id=kwargs['id'])
-        serializer = self.get_serializer(Product.objects.filter(category=category), many=True)
-        return success_response(serializer.data)
-
 
 
 @permission_classes((AllowAny,))
@@ -114,4 +78,18 @@ class ContactView(generics.RetrieveAPIView, generics.CreateAPIView):
 
 def admin_redirect(request):
     return redirect("admin/")
+
+
+
+
+
+
+@permission_classes((AllowAny, ))
+class SubscriptionView(generics.RetrieveAPIView):
+    serializer_class = SubscriptionSerializer
+    def get(self, request, *args, **kwargs):
+        serializer = self.get_serializer(Subscription.objects.all(), many=True)
+        return success_response(serializer.data)
+
+
 

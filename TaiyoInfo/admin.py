@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import GeneralInfo, Addres, Policy, NewsLetter , Category , Product , Subscription , Contact
+from .models import GeneralInfo, Addres, Policy, NewsLetter, Subscription, Contact
+from django_apscheduler.models import DjangoJob, DjangoJobExecution
+from django.contrib.auth.models import Group
+
+admin.site.unregister((DjangoJob, DjangoJobExecution, Group))
+
 
 
 @admin.register(GeneralInfo)
@@ -56,8 +61,6 @@ class NewsLetterAdmin(admin.ModelAdmin):
     list_display_links = ['id', 'email']
 
 
-admin.site.register(Category)
-admin.site.register(Product)
 
 
 @admin.register(Contact)

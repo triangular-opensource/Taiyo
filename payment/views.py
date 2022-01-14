@@ -16,6 +16,10 @@ from razorpay import client
 from .models import Payment
 from TaiyoInfo.models import Subscription
 
+from datetime import timedelta
+
+from django.core.mail import send_mail, mail_managers
+
 User = get_user_model()
 
 RAZORPAY_KEY_ID = "rzp_test_240llZpXCqHDn1"
@@ -52,36 +56,36 @@ def success_payment(request):
             order = Payment.objects.filter(order_id=data['razorpay_order_id'])
             order.update(payment_id=data['razorpay_payment_id'], payment_signature=data['razorpay_signature'], paid=True)
             try:
-                pass
-                # send_mail(
-                #     f"Payment Successfully Completed for Rs. {order[0].amount} on Tracerz",
-                #     f"Thank you for recharging at Tracerz.\n\nFor confirmation or proof you can contact us at admin@tracerz.in\n\nWe hope you are enjoying our services\n\nThank You\nRegards Tracerz",
-                #     "noreply@tracerz.in",
-                #     [request.user.email],
-                #     fail_silently=False
-                # )
-                # mail_managers(
-                #     f"Payment Recieved of Rs. {order[0].amount} from {request.user.name}",
-                #     f"Please Confirm the payment and {order[0].amount} to their balance on backend panel.\n\nThank You\nRegards Tracerz",
-                #     fail_silently=False
-                # )
+                send_mail(
+                    f"Payment Successfully Completed for Rs. {order[0].amount} on Taiyo",
+                    f"Thank you for subscribing at Taiyo.\n\nFor confirmation or proof you can contact us at taiyo.apex@gmail.com\n\nWe hope you are enjoying our services\n\nThank You\nRegards Taiyo",
+                    "taiyo.apex@gmail.com",
+                    [order.user.email],
+                    fail_silently=False
+                )
+                mail_managers(
+                    f"Payment Recieved of Rs. {order[0].amount} from {order.user.name}",
+                    f"Please Confirm the payment of Rs. {order[0].amount}.\n\nThank You\nRegards Taiyo",
+                    fail_silently=False
+                )
             except Exception as e:
                 pass
             
             # TODO: GST Calculation Stuff
 
-            # total_balance = request.user.total_balance
-            # curr_balance = request.user.balance
+            # total_balance = order.user.total_balance
+            # curr_balance = order.user.balance
             # gst = order[0].amount*18/(100 + 18)
             # amount_without_gst = order[0].amount - gst
             # total_balance += amount_without_gst
             # curr_balance += amount_without_gst
-            # User.objects.filter(username=request.user.username, id=request.user.id).update(
-            #     balance = curr_balance,
-            #     total_balance = total_balance,
-            #     subscribed = True
-            # )
+
+            subscription = Subscription.objects.get(amount=int(order[0].amount))
+            User.objects.filter(email=order[0].user.email, id=order[0].user.id).update(
+                package_type = subscription,
+                package_expiry = order[0].user.package_expiry + timedelta(days=int(subscription.days))
+            )
             
-            return redirect(f"{settings.FRONTEND_URL}/package-history")
+            return redirect(f"{settings.FRONTEND_URL}/package-history?payment=success")
         else:
             return redirect(f"{settings.FRONTEND_URL}/package-history")

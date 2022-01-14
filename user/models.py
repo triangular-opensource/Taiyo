@@ -52,17 +52,12 @@ class Token(models.Model):
         super(Token, self).save(*args, **kwargs)
 
 
-
-
-
-
 class Notification(models.Model):
     heading = models.CharField(max_length=300)
     text = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     create_time = models.DateTimeField(auto_now=True)
+    advertisement = models.ForeignKey("Ads.Advertisement", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return str(self.id)
-
-
