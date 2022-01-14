@@ -30,7 +30,7 @@ class ProductFields(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.id
+        return self.product.name
 
     class Meta:
         verbose_name = "Product Field"
