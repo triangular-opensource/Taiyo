@@ -43,10 +43,18 @@ class Advertisement(models.Model):
     bidding_close_date = models.DateTimeField(default=(timezone.now() + timedelta(days=15)))
     selected_bid = models.ForeignKey('Ads.Bid', on_delete=models.DO_NOTHING, null=True, blank=True, related_name="winning_bid")
     approval = models.BooleanField(default=False)
-    author_name = models.CharField(max_length=40)
-    author_mobile_number = models.CharField(max_length=10, validators=[validate_phone_number])
-    author_country = models.CharField(max_length=20)
-    author_business_address = models.CharField(max_length=100)
+
+    ## author information
+
+    name = models.CharField(max_length=40)
+    mobile_number = models.CharField(max_length=10, validators=[validate_phone_number])
+    business_address = models.CharField(max_length=100)
+    country = models.CharField(max_length=30)
+    city = models.CharField(max_length=30)
+    state = models.CharField(max_length=30)
+
+
+    #creater
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="created_by", null=True)
     #location edit
     latitude = models.CharField(max_length=40)
