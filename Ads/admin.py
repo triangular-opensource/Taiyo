@@ -27,14 +27,13 @@ class AdAdmin(admin.ModelAdmin):
         ("Product Specification", {
             "fields": (
                 "quality",
-                "thickness",
-                "width",
-                "length",
-                "grade_or_spec",
+                "dimentions",
+                "grade",
                 "temper",
                 "specification_number",
                 "quantity",
                 "coating_in_gsm",
+                "color"
             )
         }),
         ("Bidding Data", {
@@ -66,10 +65,12 @@ class AdAdmin(admin.ModelAdmin):
         }),
         ("Author Details", {
             "fields": (
-                "author_name",
-                "author_mobile_number",
-                "author_country",
-                "author_business_address",
+                "name",
+                "mobile_number",
+                "country",
+                "state",
+                "city",
+                "business_address",
             )
         })
     )
