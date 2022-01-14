@@ -56,8 +56,6 @@ class NewsLetterAdmin(admin.ModelAdmin):
     list_display_links = ['id', 'email']
 
 
-admin.site.register(Category)
-admin.site.register(Product)
 
 
 @admin.register(Contact)

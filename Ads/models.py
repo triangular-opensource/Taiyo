@@ -47,6 +47,11 @@ class Advertisement(models.Model):
     author_business_address = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="created_by", null=True)
 
+
+    #location edit
+    latitude = models.CharField(max_length=40)
+    longitude = models.CharField(max_length=40)
+
     timestamp = models.DateTimeField(auto_now=True)
 
     @property

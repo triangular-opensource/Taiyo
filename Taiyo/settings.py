@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'user',
     'Ads',
     'payment',
+    'features'
 ]
 
 

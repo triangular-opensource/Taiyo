@@ -53,42 +53,6 @@ class NewsLetterView(generics.RetrieveAPIView, generics.CreateAPIView):
         return bad_request_response(serializer.errors)
 
 
-@permission_classes((AllowAny, ))
-class CategoryView(generics.RetrieveAPIView):
-    serializer_class = CategorySerializer
-
-    def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Category.objects.all(), many=True)
-        return success_response(serializer.data)
-
-
-@permission_classes((AllowAny, ))
-class ProductView(generics.RetrieveAPIView):
-    serializer_class = ProductSerializer
-    def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Product.objects.all(), many=True)
-        return success_response(serializer.data)
-
-
-
-
-@permission_classes((AllowAny, ))
-class SubscriptionView(generics.RetrieveAPIView):
-    serializer_class = SubscriptionSerializer
-    def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Subscription.objects.all(), many=True)
-        return success_response(serializer.data)
-
-
-
-@permission_classes((AllowAny, ))
-class ProductCategoryView(generics.RetrieveAPIView):
-    serializer_class = ProductSerializer
-    def get(self, request, *args, **kwargs):
-        category = Category.objects.get(id=kwargs['id'])
-        serializer = self.get_serializer(Product.objects.filter(category=category), many=True)
-        return success_response(serializer.data)
-
 
 
 @permission_classes((AllowAny,))
@@ -114,4 +78,18 @@ class ContactView(generics.RetrieveAPIView, generics.CreateAPIView):
 
 def admin_redirect(request):
     return redirect("admin/")
+
+
+
+
+
+
+@permission_classes((AllowAny, ))
+class SubscriptionView(generics.RetrieveAPIView):
+    serializer_class = SubscriptionSerializer
+    def get(self, request, *args, **kwargs):
+        serializer = self.get_serializer(Subscription.objects.all(), many=True)
+        return success_response(serializer.data)
+
+
 
