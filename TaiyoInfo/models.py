@@ -23,6 +23,9 @@ class Policy(models.Model):
     def __str__(self):
         return "Company policies"
 
+    class Meta:
+        verbose_name = "Policie"
+
 
 class GeneralInfo(models.Model):
     name = models.CharField(max_length=50)

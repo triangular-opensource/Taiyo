@@ -1,5 +1,9 @@
-from django.shortcuts import render
 from rest_framework.permissions import AllowAny
+from rest_framework.decorators import permission_classes
+from rest_framework import generics
+from features.serializer import *
+from features.models import *
+from services.response import success_response, bad_request_response
 
 
 @permission_classes((AllowAny,))
@@ -35,5 +39,5 @@ class ProductFieldView(generics.RetrieveAPIView):
     serializer_class = ProductFieldSerializer
 
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(ProductField.objects.all(), many=True)
+        serializer = self.get_serializer(ProductFields.objects.all(), many=True)
         return success_response(serializer.data)

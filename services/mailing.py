@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from services.newsletterdata import generateNewsData
 
 
-def send_email(subject, message, to):
+def send_email(subject, message, to, html=None):
     return send_mail(
         subject=subject,
         message=message,
@@ -14,7 +14,7 @@ def send_email(subject, message, to):
         auth_user=None,
         auth_password=None,
         connection=None,
-        html_message=None
+        html_message=html
     )
 
 

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from TaiyoInfo.views import GeneralInfoView, AddressView, PolicyView, NewsLetterView , ContactView , SubscriptionView , CategoryView , ProductView , ProductCategoryView
+from TaiyoInfo.views import GeneralInfoView, AddressView, PolicyView, NewsLetterView , ContactView , SubscriptionView
 
 urlpatterns = [
     path("general-info", GeneralInfoView.as_view(), name="general-info"),
@@ -9,7 +9,4 @@ urlpatterns = [
     path("news-letter", NewsLetterView.as_view(), name="news-letter"),
     path("subscription", SubscriptionView.as_view(), name="subscription"),
     path("contact", ContactView.as_view(), name="contact"),
-    path("category", CategoryView.as_view(), name="category"),
-    path("product", ProductView.as_view(), name="product"),
-    path("product/<int:id>", ProductCategoryView.as_view(), name="product by category")
 ]

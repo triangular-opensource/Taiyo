@@ -1,4 +1,6 @@
-
+from rest_framework import serializers
+from features.models import *
+from services.serializers import ForeignKeyField
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,7 +18,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ProductFieldSerializer(serializers.ModelSerializer):
-    product = ForeignKeyField(queryset=Products.objects, filter_by="product")
+    product = ForeignKeyField(queryset=Product.objects, filter_by="name")
     class Meta:
         model = Product
         fields = "__all__"
