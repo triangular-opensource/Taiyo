@@ -183,8 +183,8 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "taiyo.apex@gmail.com"
 EMAIL_HOST_PASSWORD = "Gj@19bg9846"
 
-# FRONTEND_URL = "https://taiyo-768b4.web.app"
-FRONTEND_URL = "http://localhost:3000"
+FRONTEND_URL = "https://taiyo-768b4.web.app"
+# FRONTEND_URL = "http://localhost:3000"
 
 MANAGERS = [("Manoj Mishra", "taiyo.apex@gmail.com"),]
 

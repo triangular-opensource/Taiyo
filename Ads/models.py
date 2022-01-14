@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 from django.utils.html import mark_safe
+from django.conf import settings
 
 from services.constant import AD_QUALITY, AD_TEMPER,  BUY_OR_SELL
 from features.models import Product
@@ -89,6 +90,16 @@ class Advertisement(models.Model):
     def __str__(self):
         return f"#{self.id}"
 
+    def save(self, *args, **kwargs):
+        if self.selected_bid:
+            send_email("Taiyo : Approval Of Bid",
+                       f''' 
+                       **** Taiyo industries recommend you to deal with the bidder carefully to avoid frauds. ****
+                       **** Taiyo is not responsible for any miscondut in it. ****
+                        verify this add..... 
+                        {settings.FRONTEND_URL}/post/{self.id} '''
+                       ,
+                       self.selected_bid.user.email)
 
 class Bid(models.Model):
     amount = models.FloatField()
