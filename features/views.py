@@ -39,5 +39,6 @@ class ProductFieldView(generics.RetrieveAPIView):
     serializer_class = ProductFieldSerializer
 
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(ProductFields.objects.all(), many=True)
+        product = Product.objects.get(id=kwargs['id'])
+        serializer = self.get_serializer(ProductFields.objects.filter(product=product), many=True)
         return success_response(serializer.data)
