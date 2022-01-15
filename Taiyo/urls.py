@@ -28,6 +28,7 @@ urlpatterns = [
     path("api/", include("TaiyoInfo.urls")),
     path("api/", include("Ads.urls")),
     path("api/", include("payment.urls")),
+    path("api/", include("features.urls")),
     path("api/auth/", include("user.urls")),
     path('activate-user/<uidb64>/<token>', activate_user, name="activate"),
 ]
