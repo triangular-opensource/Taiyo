@@ -5,6 +5,8 @@ from Ads.models import Advertisement, Bid
 class AdAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'product', 'category', 'timestamp']
     list_display_links = ["__str__", "product", "category"]
+
+
     readonly_fields = [
         'category',
         'image_1_display',
@@ -13,6 +15,8 @@ class AdAdmin(admin.ModelAdmin):
         'image_4_display',
         "bidding_close_date",
     ]
+
+
     fieldsets = (
         (None, {
             "fields": (
@@ -24,25 +28,7 @@ class AdAdmin(admin.ModelAdmin):
                 "user"
             ),
         }),
-        ("Product Specification", {
-            "fields": (
-                "quality",
-                "dimentions",
-                "grade",
-                "temper",
-                "specification_number",
-                "quantity",
-                "coating_in_gsm",
-                "color"
-            )
-        }),
-        ("Bidding Data", {
-            "fields": (
-                "bidding",
-                "bidding_close_date",
-                "selected_bid"
-            )
-        }),
+
         ("Files", {
             "fields": (
                 "image_1",
@@ -63,6 +49,29 @@ class AdAdmin(admin.ModelAdmin):
                 "pdf_file_link",
             ),
         }),
+
+        ("Product Specification", {
+            "fields": (
+                "quality",
+                "dimensions",
+                "grade",
+                "temper",
+                "specification_number",
+                "quantity",
+                "coating_in_gsm",
+                "color"
+            )
+        }),
+
+        ("Bidding Data", {
+            "fields": (
+                "bidding",
+                "bidding_close_date",
+                "selected_bid"
+            )
+        }),
+
+
         ("Author Details", {
             "fields": (
                 "name",

@@ -34,7 +34,7 @@ class Advertisement(models.Model):
     image_4_link = models.URLField(max_length=300, null=True, blank=True) 
     quality = models.CharField(max_length=10, choices=AD_QUALITY, null=True, blank=True)
     temper = models.CharField(max_length=4, choices=AD_TEMPER, null=True, blank=True)
-    dimentions = models.CharField(max_length=100, null=True, blank=True)
+    dimensions = models.CharField(max_length=100, null=True, blank=True)
     grade = models.CharField(max_length=50, null=True, blank=True)
     specification_number = models.CharField(max_length=20, null=True, blank=True)
     quantity = models.IntegerField(null=True, blank=True)
