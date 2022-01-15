@@ -67,7 +67,8 @@ class AdAdmin(admin.ModelAdmin):
             "fields": (
                 "bidding",
                 "bidding_close_date",
-                "selected_bid"
+                "selected_bid",
+                "approval"
             )
         }),
 
@@ -78,6 +79,12 @@ class AdAdmin(admin.ModelAdmin):
                 "mobile_number",
                 "business_address",
                 "location"
+            )
+        }),
+
+        ("Approval", {
+            "fields": (
+                "visible",
             )
         })
     )
