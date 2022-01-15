@@ -20,6 +20,6 @@ class ProductSerializer(serializers.ModelSerializer):
 class ProductFieldSerializer(serializers.ModelSerializer):
     product = ForeignKeyField(queryset=Product.objects, filter_by="name")
     class Meta:
-        model = Product
+        model = ProductFields
         fields = "__all__"
 
