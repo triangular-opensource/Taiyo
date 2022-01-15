@@ -67,10 +67,8 @@ class AdAdmin(admin.ModelAdmin):
             "fields": (
                 "name",
                 "mobile_number",
-                "country",
-                "state",
-                "city",
                 "business_address",
+                "location"
             )
         })
     )

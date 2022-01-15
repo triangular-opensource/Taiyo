@@ -50,10 +50,7 @@ class Advertisement(models.Model):
     name = models.CharField(max_length=40)
     mobile_number = models.CharField(max_length=10, validators=[validate_phone_number])
     business_address = models.CharField(max_length=100)
-    country = models.CharField(max_length=30)
-    city = models.CharField(max_length=30)
-    state = models.CharField(max_length=30)
-
+    location = models.CharField(max_length=100)
 
     #creater
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="created_by", null=True)
