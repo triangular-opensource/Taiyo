@@ -13,7 +13,7 @@ class AdvertismentView(generics.RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         case = kwargs['id']
         if case == 1: #all
-            serializer = self.get_serializer(Advertisement.objects.all().order_by("-id"), many=True)
+            serializer = self.get_serializer(Advertisement.objects.filter(visible=True).order_by("-id"), many=True)
         elif case == 2: #active ads
             serializer = self.get_serializer(Advertisement.objects.filter(bidding_close_date__gte=timezone.now(), user=request.user).order_by("-id"), many=True)
         elif case == 3: #inactive ads
