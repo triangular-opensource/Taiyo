@@ -67,6 +67,10 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             "user__email",
             "user__phone_number",
             "basic_price",
+            "approval",
+            "visible",
+            "latitude",
+            "longitude"
         ]
         read_only_field = [
             "image_1",
