@@ -55,8 +55,8 @@ class Advertisement(models.Model):
     #creater
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="created_by", null=True)
     #location edit
-    latitude = models.CharField(max_length=15, blank=True, null=True)
-    longitude = models.CharField(max_length=15, blank=True, null=True)
+    latitude = models.FloatField(max_length=50, blank=True, null=True)
+    longitude = models.FloatField(max_length=50, blank=True, null=True)
     visible = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now=True)
 
