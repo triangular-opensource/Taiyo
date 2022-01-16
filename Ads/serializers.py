@@ -12,10 +12,13 @@ class AdvertisementViewSerializer(serializers.ModelSerializer):
                   'image_1_link',
                   'product_description',
                   'timestamp',
-                  'business_address',
+                  'location',
                   'buy_or_sell',
                   'bidding_close_date',
-                  'basic_price']
+                  'basic_price',
+                  'latitude',
+                  'longitude'
+                  ]
 
 class AdvertisementSerializer(serializers.ModelSerializer):
     image_1 = serializers.FileField(required=False)
