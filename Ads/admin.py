@@ -86,7 +86,15 @@ class AdAdmin(admin.ModelAdmin):
             "fields": (
                 "visible",
             )
+        }),
+
+        ("DisApproval Email", {
+            "fields": (
+                "subject",
+                "message"
+            )
         })
+
     )
 
 

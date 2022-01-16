@@ -60,6 +60,11 @@ class Advertisement(models.Model):
     visible = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now=True)
 
+    #email sending
+    subject = models.CharField(max_length=100 , blank=True , null=True)
+    message = models.TextField(blank=True , null=True)
+
+
     @property
     def category(self):
         return self.product.category
@@ -98,6 +103,14 @@ class Advertisement(models.Model):
                        ,
                        self.selected_bid.user.email)
         super(Advertisement, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if self.subject and self.message:
+            send_email(self.subject,self.message,
+                       self.user.email)
+        super(Advertisement, self).delete(*args, **kwargs)
+
+
 
 class Bid(models.Model):
     amount = models.FloatField()
