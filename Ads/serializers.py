@@ -12,8 +12,7 @@ class AdvertisementViewSerializer(serializers.ModelSerializer):
                   'image_1_link',
                   'product_description',
                   'timestamp',
-                  'author_business_address',
-                  'author_country',
+                  'business_address',
                   'buy_or_sell',
                   'bidding_close_date',
                   'basic_price']
