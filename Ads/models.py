@@ -43,7 +43,7 @@ class Advertisement(models.Model):
     bidding = models.BooleanField(default=True)
     bidding_close_date = models.DateTimeField(default=(timezone.now() + timedelta(days=15)))
     selected_bid = models.ForeignKey('Ads.Bid', on_delete=models.DO_NOTHING, null=True, blank=True, related_name="winning_bid")
-    approval = models.BooleanField(default=False)
+    approval = models.BooleanField(default=False , blank=True , null = True)
 
     ## author information
 
@@ -55,10 +55,10 @@ class Advertisement(models.Model):
     #creater
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="created_by", null=True)
     #location edit
-    latitude = models.CharField(max_length=40)
-    longitude = models.CharField(max_length=40)
-    visible = models.BooleanField(default=False)
-    timestamp = models.DateTimeField(auto_now=True)
+    latitude = models.CharField(max_length=40 , blank=True , null = True)
+    longitude = models.CharField(max_length=40 , blank=True , null = True)
+    visible = models.BooleanField(default=False , blank=True , null = True)
+    timestamp = models.DateTimeField(auto_now=True , blank=True , null = True)
 
     @property
     def category(self):
