@@ -24,7 +24,7 @@ class Advertisement(models.Model):
     excel_file_link = models.URLField(max_length=300, null=True, blank=True)
     pdf_file = models.FileField(null=True, blank=True)
     pdf_file_link = models.URLField(max_length=300, null=True, blank=True)
-    image_1 = models.FileField(default='/static/image/notfound.jpg')
+    image_1 = models.FileField(null=True , blank=True)
     image_1_link = models.URLField(max_length=300)
     image_2 = models.FileField(null=True, blank=True)
     image_2_link = models.URLField(max_length=300, null=True, blank=True)
