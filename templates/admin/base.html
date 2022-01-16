@@ -8,6 +8,8 @@
   <link rel="stylesheet" type="text/css" href="{% static "admin/css/nav_sidebar.css" %}">
   <script src="{% static 'admin/js/nav_sidebar.js' %}" defer></script>
 {% endif %}
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
 {% block extrastyle %}{% endblock %}
 {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}">{% endif %}
 {% block extrahead %}{% endblock %}
@@ -100,6 +102,7 @@
     </div>
 </div>
 <!-- END Container -->
+   
 
     <script src="/static/js/admin_file_upload_to_firebase.js"></script>
     <script src="/static/js/general_info_file_upload_to_firebase.js"></script>

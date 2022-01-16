@@ -20,7 +20,7 @@ var pdf_file_link = document.getElementById('id_pdf_file_link');
 
 var product = document.getElementById("id_product");
 var base_price = document.getElementById("id_basic_price");
-var billing_close_date = document.getElementsByClassName("field-bidding_close_date")[0].children[1].children[0].innerText;
+var product_description = document.getElementById("id_product_description");
 
 var image_1_id = "id_image_1";
 var image_2_id = "id_image_2";
@@ -44,7 +44,7 @@ document.getElementById("id_pdf_file").addEventListener("change", () => getFileL
 const getFileLink = (image_link, image_id, image_display = null) => {
     var storageRef = firebase.storage().ref();
     var file = document.getElementById(image_id).files[0];
-    var folder_name = product.value + base_price.value + billing_close_date;
+    var folder_name = base_price.value + product_description.value;
     var thisRef = storageRef.child(`Advertisements/${folder_name}/${file.name}`);
     
     thisRef.put(file).then((snapshot) => {

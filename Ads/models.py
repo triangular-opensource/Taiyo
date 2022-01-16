@@ -55,10 +55,10 @@ class Advertisement(models.Model):
     #creater
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="created_by", null=True)
     #location edit
-    latitude = models.CharField(max_length=40 , blank=True , null = True)
-    longitude = models.CharField(max_length=40 , blank=True , null = True)
-    visible = models.BooleanField(default=False , blank=True , null = True)
-    timestamp = models.DateTimeField(auto_now=True , blank=True , null = True)
+    latitude = models.CharField(max_length=15, blank=True, null=True)
+    longitude = models.CharField(max_length=15, blank=True, null=True)
+    visible = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now=True)
 
     @property
     def category(self):
@@ -97,6 +97,7 @@ class Advertisement(models.Model):
                         {settings.FRONTEND_URL}/post/{self.id} '''
                        ,
                        self.selected_bid.user.email)
+        super(Advertisement, self).save(*args, **kwargs)
 
 class Bid(models.Model):
     amount = models.FloatField()
