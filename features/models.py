@@ -25,7 +25,6 @@ class ProductFields(models.Model):
     specification_number = models.BooleanField(default=False)
     quantity = models.BooleanField(default=False)
     coating_in_gsm = models.BooleanField(default=False)
-    product_description = models.BooleanField(default=False)
     color = models.BooleanField(default=False)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
