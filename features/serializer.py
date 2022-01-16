@@ -17,9 +17,3 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 
-class ProductFieldSerializer(serializers.ModelSerializer):
-    product = ForeignKeyField(queryset=Product.objects, filter_by="name")
-    class Meta:
-        model = ProductFields
-        fields = "__all__"
-
