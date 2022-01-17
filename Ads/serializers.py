@@ -29,6 +29,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
     user__last_name = serializers.CharField(source="selected_bid.user.last_name", allow_null=True, allow_blank=True, required=False)
     user__email = serializers.CharField(source="selected_bid.user.email", allow_null=True, allow_blank=True, required=False)
     user__phone_number = serializers.CharField(source="selected_bid.user.phone_number", allow_null=True, allow_blank=True, required=False)
+    email = serializers.CharField(source="user.email", allow_null=True, all_blank=True, required=False)
     class Meta:
         model = Advertisement
         fields = [
@@ -56,6 +57,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             "selected_bid_amount", 
             "name",
             "mobile_number",
+            "email",
             "location",
             "business_address",
             "color",
