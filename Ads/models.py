@@ -102,6 +102,11 @@ class Advertisement(models.Model):
                         visit the AD-ID : {self.id} '''
                        ,
                        self.selected_bid.user.email)
+        
+        if self.subject and self.message:
+            send_email(self.subject,self.message,
+                       self.user.email)
+
         super(Advertisement, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
