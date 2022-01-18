@@ -12,14 +12,14 @@ class AdvertismentView(generics.RetrieveAPIView):
     serializer_class = AdvertisementViewSerializer
     def get(self, request, *args, **kwargs):
         case = kwargs['id']
-        if case == 1: #all
-            serializer = self.get_serializer(Advertisement.objects.filter(visible=True).order_by("-id"), many=True)
+        if case == 1: #all active ads
+            serializer = self.get_serializer(Advertisement.objects.filter(visible=True , bidding_close_date__gte=timezone.now()).order_by("-id"), many=True)
         elif case == 2: #active ads
-            serializer = self.get_serializer(Advertisement.objects.filter(bidding_close_date__gte=timezone.now(), user=request.user).order_by("-id"), many=True)
-        elif case == 3: #inactive ads
+            serializer = self.get_serializer(Advertisement.objects.filter(bidding_close_date__gte=timezone.now() , visible = True , user=request.user).order_by("-id"), many=True)
+        elif case == 3: #inactive ads od user
             serializer = self.get_serializer(Advertisement.objects.filter(bidding_close_date__lte=timezone.now(), user=request.user ).order_by("-id"), many=True)
         elif case == 4:# selected ads
-            serializer = self.get_serializer(Advertisement.objects.all().exclude(selected_bid=None,user=request.user).order_by("-id"),many=True)
+            serializer = self.get_serializer(Advertisement.objects.filter(user=request.user).exclude(selected_bid = None ).order_by("-id"),many=True)
         elif case == 5: # add_type buy
             serializer = self.get_serializer(Advertisement.objects.filter(buy_or_sell='Buy').order_by("-id"), many=True)
         elif case == 6:# add_type_sell
@@ -32,7 +32,7 @@ class AdvertismentView(generics.RetrieveAPIView):
             serializer = self.get_serializer(Advertisement.objects.filter(buy_or_sell='Sell').filter(product__category=int(request.GET['id'])).order_by("-id"), many=True)
         elif case == 10: #all user  addes
             serializer = self.get_serializer(Advertisement.objects.filter(user = request.user).order_by("-id"), many=True)
-        elif case == 11: #active ads
+        elif case == 11: #Pending for approval ads
             serializer = self.get_serializer(Advertisement.objects.filter(visible = False, user=request.user).order_by("-id"), many=True)
         else:
             serializer = self.get_serializer(Advertisement.objects.all().order_by("-id"), many=True)
