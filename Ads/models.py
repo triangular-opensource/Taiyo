@@ -99,7 +99,7 @@ class Advertisement(models.Model):
                        **** Taiyo industries recommend you to deal with the bidder carefully to avoid frauds. ****
                        **** Taiyo is not responsible for any miscondut in it. ****
                         verify this add..... 
-                        {settings.FRONTEND_URL}/post/{self.id} '''
+                        visit the AD-ID : {self.id} '''
                        ,
                        self.selected_bid.user.email)
         super(Advertisement, self).save(*args, **kwargs)

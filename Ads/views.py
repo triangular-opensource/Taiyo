@@ -32,8 +32,8 @@ class AdvertismentView(generics.RetrieveAPIView):
             serializer = self.get_serializer(Advertisement.objects.filter(buy_or_sell='Sell').filter(product__category=int(request.GET['id'])).order_by("-id"), many=True)
         elif case == 10: #all user  addes
             serializer = self.get_serializer(Advertisement.objects.filter(user = request.user).order_by("-id"), many=True)
-        # elif case == 8:  #location
-        #     serializer = self.get_serializer(Advertisement.objects.filter(product__category=request.GET['id']).order_by("-id"), many=True)
+        elif case == 11: #active ads
+            serializer = self.get_serializer(Advertisement.objects.filter(visible = False, user=request.user).order_by("-id"), many=True)
         else:
             serializer = self.get_serializer(Advertisement.objects.all().order_by("-id"), many=True)
         return success_response(serializer.data)
