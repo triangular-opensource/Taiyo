@@ -67,6 +67,16 @@ class AdvertismentChanges(generics.ListAPIView, generics.UpdateAPIView, generics
             return bad_request_response({"message": "ad not exist"})
         if serializer.is_valid():
             serializer.save()
+
+            #check the approval
+            notify = Notification(
+                heading="Bid Selected",
+                text=f"Approve the Following Advertisement on ad:id -> {instance}",
+                user=instance.selected_bid.user,
+                advertisement=instance
+            )
+            notify.save()
+
             return success_response(serializer.data)
         return bad_request_response(serializer.errors)
 
