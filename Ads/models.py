@@ -67,7 +67,11 @@ class Advertisement(models.Model):
 
     @property
     def category(self):
-        return self.product.category
+        return self.product.sub_category.category
+
+    @property
+    def sub_category(self):
+        return self.product.sub_category
    
     def image_1_display(self):
         if self.image_1_link:
