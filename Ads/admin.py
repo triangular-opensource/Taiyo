@@ -3,9 +3,9 @@ from django.contrib import admin
 from Ads.models import Advertisement, Bid
 
 class AdAdmin(admin.ModelAdmin):
-    list_display = ['__str__', 'product', 'category', 'sub_category', 'timestamp', 'visible']
-    list_display_links = ["__str__", "product", "category", 'sub_category']
-
+    list_display = ['__str__', 'product', 'category', 'sub_category', 'timestamp', 'user', 'visible']
+    list_display_links = ["__str__", "product"]
+    list_filter = ['category', 'sub_category', 'user', 'visible']
 
     readonly_fields = [
         'category',
