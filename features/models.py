@@ -1,7 +1,8 @@
 from django.db import models
 
 class Category(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=100)
+
 
     def __str__(self):
         return self.name
@@ -9,9 +10,22 @@ class Category(models.Model):
     class Meta:
         verbose_name = "Categorie"
 
+
+class SubCategory(models.Model):
+    name = models.CharField(max_length=100)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Sub Categorie"
+
+
+
 class Product(models.Model):
     name = models.CharField(max_length=30)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
 
     quality = models.BooleanField(default=False)
     temper = models.BooleanField(default=False)
