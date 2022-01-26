@@ -13,7 +13,7 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     name = models.CharField(max_length=100)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE , null = True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -25,7 +25,7 @@ class SubCategory(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=30)
-    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE , null = True)
 
     quality = models.BooleanField(default=False)
     temper = models.BooleanField(default=False)
