@@ -65,7 +65,7 @@ class Advertisement(models.Model):
 
     @property
     def category(self):
-        return self.product.sub_category
+        return self.product.sub_category.category
 
     @property
     def sub_category(self):
