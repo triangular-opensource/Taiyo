@@ -74,7 +74,7 @@ class UserAdmin(BaseUserAdmin):
     list_display_links = ['id', "email"]
     list_filter = ["user_type", 'is_staff', 'is_superuser', 'is_active', 'groups']
     search_fields = ["email", "first_name", "last_name", "user_type", "phone_number"]
-    filter_horizontal= ['groups', 'friends']
+    filter_horizontal= ['groups']
     fieldsets = (
         (None, {
             "fields": ("email", "password"),
@@ -83,7 +83,7 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_type'),
         }),
         ("Personal Information", {
-            "fields": ("first_name", "middle_name", "last_name", "phone_number", "image", "friends"),
+            "fields": ("first_name", "middle_name", "last_name", "phone_number", "image"),
         }),
         ('Company Information', {
             'fields': (

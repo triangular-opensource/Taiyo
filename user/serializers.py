@@ -87,20 +87,8 @@ class ResetPasswordSerializer(serializers.Serializer):
         fields = ['email']
 
 
-class FriendUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = [
-            "first_name",
-            "middle_name",
-            "last_name",
-            "email",
-            "image",
-            "phone_number"
-        ]
 
 class UserSerializer(serializers.ModelSerializer):
-    friends = FriendUserSerializer(many=True)
     class Meta:
         model = User
         fields = [
@@ -123,8 +111,7 @@ class UserSerializer(serializers.ModelSerializer):
             "company_country",
             "company_pin_code",
             "last_login",
-            "date_joined",
-            "friends"
+            "date_joined"
         ]
         read_only_fields = ["id", "last_login", "date_joined", "email"]
 
