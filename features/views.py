@@ -20,8 +20,8 @@ class ProductCategoryView(generics.RetrieveAPIView):
     serializer_class = ProductSerializer
 
     def get(self, request, *args, **kwargs):
-        category = Category.objects.get(id=kwargs['id'])
-        serializer = self.get_serializer(Product.objects.filter(category=category), many=True)
+        sub_category = SubCategory.objects.get(id=kwargs['id'])
+        serializer = self.get_serializer(Product.objects.filter(sub_category=sub_category), many=True)
         return success_response(serializer.data)
 
 
@@ -32,4 +32,16 @@ class CategoryView(generics.RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(Category.objects.all(), many=True)
         return success_response(serializer.data)
+
+
+
+
+@permission_classes((AllowAny,))
+class SubCategoryView(generics.RetrieveAPIView):
+    serializer_class = SubCategorySerializer
+    def get(self, request, *args, **kwargs):
+        category = Category.objects.get(id=kwargs['id'])
+        serializer = self.get_serializer(SubCategory.objects.filter(category=category), many=True)
+        return success_response(serializer.data)
+
 

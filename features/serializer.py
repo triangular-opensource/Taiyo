@@ -8,12 +8,20 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ProductSerializer(serializers.ModelSerializer):
+
+
+class SubCategorySerializer(serializers.ModelSerializer):
     category = ForeignKeyField(queryset=Category.objects, filter_by="name")
     class Meta:
-        model = Product
+        model = SubCategory
         fields = "__all__"
 
 
+
+class ProductSerializer(serializers.ModelSerializer):
+    sub_category = ForeignKeyField(queryset=SubCategory.objects, filter_by="name")
+    class Meta:
+        model = Product
+        fields = "__all__"
 
 

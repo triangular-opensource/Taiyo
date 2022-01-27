@@ -18,7 +18,7 @@ class AdvertismentView(generics.RetrieveAPIView):
             serializer = self.get_serializer(Advertisement.objects.filter(bidding_close_date__gte=timezone.now(),visible = True,user=request.user).order_by("-id"), many=True)
         elif case == 3: #inactive ads od user
             serializer = self.get_serializer(Advertisement.objects.filter(bidding_close_date__lte=timezone.now(), user=request.user ).order_by("-id"), many=True)
-        elif case == 4:# selected ads of user
+        elif case == 4:# selected ads od user
             serializer = self.get_serializer(Advertisement.objects.filter(user=request.user).exclude(selected_bid = None ).order_by("-id"),many=True)
         elif case == 5: # add_type buy
             serializer = self.get_serializer(Advertisement.objects.filter(buy_or_sell='Buy').order_by("-id"), many=True)
