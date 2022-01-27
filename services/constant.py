@@ -10,6 +10,7 @@ BUY_OR_SELL = (
 AD_TEMPER = (
     ("Hard", "Hard"),
     ("Soft", "Soft"),
+    ("Any", "Any"),
 )
 AD_QUALITY = (
     ("Prime", "Prime"),
