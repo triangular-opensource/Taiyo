@@ -1,10 +1,8 @@
 from datetime import timedelta
-from email.policy import default
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 from django.utils.html import mark_safe
-from django.conf import settings
 
 from services.constant import AD_QUALITY, AD_TEMPER,  BUY_OR_SELL
 from features.models import Product
@@ -58,7 +56,7 @@ class Advertisement(models.Model):
     latitude = models.FloatField(max_length=50, blank=True, null=True)
     longitude = models.FloatField(max_length=50, blank=True, null=True)
     visible = models.BooleanField(default=False)
-    timestamp = models.DateTimeField(auto_now=True)
+    timestamp = models.DateTimeField(default=timezone.now())
 
     #email sending
     subject = models.CharField(max_length=100 , blank=True , null=True)
@@ -67,7 +65,11 @@ class Advertisement(models.Model):
 
     @property
     def category(self):
-        return self.product.category
+        return self.product.sub_category.category
+
+    @property
+    def sub_category(self):
+        return self.product.sub_category
    
     def image_1_display(self):
         if self.image_1_link:

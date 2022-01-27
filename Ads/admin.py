@@ -3,12 +3,13 @@ from django.contrib import admin
 from Ads.models import Advertisement, Bid
 
 class AdAdmin(admin.ModelAdmin):
-    list_display = ['__str__', 'product', 'category', 'timestamp']
-    list_display_links = ["__str__", "product", "category"]
-
+    list_display = ['__str__', 'product', 'category', 'sub_category', 'timestamp', 'user', 'visible']
+    list_display_links = ["__str__", "product"]
+    list_filter = ['user', 'visible']
 
     readonly_fields = [
         'category',
+        'sub_category',
         'image_1_display',
         'image_2_display',
         'image_3_display',
@@ -23,6 +24,7 @@ class AdAdmin(admin.ModelAdmin):
                 "buy_or_sell",
                 'product',
                 'category',
+                'sub_category',
                 "product_description",
                 "basic_price",
                 "user"
