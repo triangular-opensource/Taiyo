@@ -92,4 +92,13 @@ class SubscriptionView(generics.RetrieveAPIView):
         return success_response(serializer.data)
 
 
+@permission_classes((AllowAny,))
+class AllView(generics.RetrieveAPIView):
+    def get(self, request, *args, **kwargs):
+        serializer = self.get_serializer(Subscription.objects.all(), many=True)
+        return success_response(serializer.data)
+
+
+
+
 

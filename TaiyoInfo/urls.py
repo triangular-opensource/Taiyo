@@ -9,4 +9,7 @@ urlpatterns = [
     path("news-letter", NewsLetterView.as_view(), name="news-letter"),
     path("subscription", SubscriptionView.as_view(), name="subscription"),
     path("contact", ContactView.as_view(), name="contact"),
+
+    path("all", AllView.as_view(), name="all"),
+
 ]

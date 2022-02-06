@@ -6,11 +6,23 @@ from services.serializers import ForeignKeyField
 
 
 class AdvertisementViewSerializer(serializers.ModelSerializer):
+    product = ForeignKeyField(queryset=Product.objects, filter_by="name")
+    sub_category = serializers.CharField(source="product.sub_category.name", allow_null=True,
+                                               allow_blank=True, required=False)
+
+    category = serializers.CharField(source="product.sub_category.category.name", allow_null=True,
+                                               allow_blank=True, required=False)
+
+
+
+
     class Meta:
         model = Advertisement
         fields = ['id',
                   'image_1_link',
-                  'product_description',
+                  'product',
+                  'sub_category',
+                  'category',
                   'timestamp',
                   'location',
                   'buy_or_sell',
