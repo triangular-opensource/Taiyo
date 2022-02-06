@@ -3,17 +3,13 @@ from rest_framework import generics
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 
-from TaiyoInfo.serializers import GeneralInfoSerializer, PolicySerializer, AddresSerializer, NewsLetterSerializer, SubscriptionSerializer , ContactSerializer
+from TaiyoInfo.serializers import GeneralInfoSerializer, PolicySerializer, AddresSerializer, NewsLetterSerializer, SubscriptionSerializer, ContactSerializer
 from services.functions import sendNewsEmail
 
 from services.response import success_response, bad_request_response
 from services.mailing import *
 
-
-
-
 from TaiyoInfo.models import GeneralInfo, NewsLetter, Addres , Policy, Subscription , Contact
-
 
 
 @permission_classes((AllowAny, ))
@@ -55,8 +51,6 @@ class NewsLetterView(generics.RetrieveAPIView, generics.CreateAPIView):
         return bad_request_response(serializer.errors)
 
 
-
-
 @permission_classes((AllowAny,))
 class ContactView(generics.RetrieveAPIView, generics.CreateAPIView):
     serializer_class = ContactSerializer
@@ -81,18 +75,9 @@ class ContactView(generics.RetrieveAPIView, generics.CreateAPIView):
 def admin_redirect(request):
     return redirect("admin/")
 
-
-
-
-
-
 @permission_classes((AllowAny, ))
 class SubscriptionView(generics.RetrieveAPIView):
     serializer_class = SubscriptionSerializer
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(Subscription.objects.all(), many=True)
         return success_response(serializer.data)
-
-
-
-
