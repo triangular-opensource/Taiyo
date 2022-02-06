@@ -39,10 +39,11 @@ class AdvertismentView(generics.RetrieveAPIView):
             serializer = self.get_serializer(Advertisement.objects.filter(visible = False, user=request.user).order_by("-id"), many=True)
         elif case == 12: #search
             query = request.GET.get('query')
-            serializer1 = self.get_serializer(Advertisement.objects.filter(visible = True , product__name__icontains = query ).order_by("-id"), many=True)
-            serializer2 = self.get_serializer(Advertisement.objects.filter(visible=True, product__sub_category__name__icontains=query ).order_by("-id"), many=True)
-            serializer3 = self.get_serializer(Advertisement.objects.filter(visible=True, product__sub_category__category__name__icontains=query ).order_by("-id"), many=True)
-            serializer = serializer1.union(serializer2,serializer3)
+            serializer1 = Advertisement.objects.filter(visible = True , product__name__icontains = query ).order_by("-id")
+            serializer2 = Advertisement.objects.filter(visible=True, product__sub_category__name__icontains=query ).order_by("-id")
+            serializer3 = Advertisement.objects.filter(visible=True, product__sub_category__category__name__icontains=query ).order_by("-id")
+            response = serializer1.union(serializer2,serializer3)
+            serializer = self.get_serializer(response, many=True)
         else:
             serializer = self.get_serializer(Advertisement.objects.all().order_by("-id"), many=True)
         return success_response(serializer.data)
