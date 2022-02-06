@@ -38,7 +38,7 @@ class AdvertismentView(generics.RetrieveAPIView):
         elif case == 11: #Pending for approval ads
             serializer = self.get_serializer(Advertisement.objects.filter(visible = False, user=request.user).order_by("-id"), many=True)
         elif case == 12: #search
-            query = request.GET.get['query']
+            query = request.GET.get('query')
             serializer1 = self.get_serializer(Advertisement.objects.filter(visible = True , product__name__icontains = query ).order_by("-id"), many=True)
             serializer2 = self.get_serializer(Advertisement.objects.filter(visible=True, product__subcategory__name__icontains=query ).order_by("-id"), many=True)
             serializer3 = self.get_serializer(Advertisement.objects.filter(visible=True, product__subcategory__category__name__icontains=query ).order_by("-id"), many=True)
