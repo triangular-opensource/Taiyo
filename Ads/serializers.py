@@ -7,6 +7,7 @@ from services.serializers import ForeignKeyField
 
 class AdvertisementViewSerializer(serializers.ModelSerializer):
     product = ForeignKeyField(queryset=Product.objects, filter_by="name")
+
     sub_category = serializers.CharField(source="product.sub_category.name", allow_null=True,
                                                allow_blank=True, required=False)
 

@@ -7,10 +7,13 @@ from rest_framework.decorators import permission_classes
 from django.utils import timezone
 from user.models import Notification
 
+
+
+
 @permission_classes((AllowAny,))
 class AdvertismentView(generics.RetrieveAPIView):
     serializer_class = AdvertisementViewSerializer
-    def get(self, request, *args, **kwargs):
+    def get(self, request,  *args, **kwargs):
         case = kwargs['id']
         if case == 1: #all active ads
             serializer = self.get_serializer(Advertisement.objects.filter(visible=True, bidding_close_date__gte=timezone.now()).order_by("-id"), many=True)
@@ -34,6 +37,19 @@ class AdvertismentView(generics.RetrieveAPIView):
             serializer = self.get_serializer(Advertisement.objects.filter(user = request.user).order_by("-id"), many=True)
         elif case == 11: #Pending for approval ads
             serializer = self.get_serializer(Advertisement.objects.filter(visible = False, user=request.user).order_by("-id"), many=True)
+
+
+        elif case == 12: #search
+            query = request.GET.get['query']
+            serializer1 = self.get_serializer(Advertisement.objects.filter(visible = True , product__name__icontain = query ).order_by("-id"), many=True)
+            serializer2 = self.get_serializer(Advertisement.objects.filter(visible=True, product__sub_category__name__icontain=query ).order_by("-id"), many=True)
+            serializer3 = self.get_serializer(Advertisement.objects.filter(visible=True, product__sub_category__category__name__icontain=query ).order_by("-id"), many=True
+
+
+
+
+
+
         else:
             serializer = self.get_serializer(Advertisement.objects.all().order_by("-id"), many=True)
         return success_response(serializer.data)
@@ -132,3 +148,4 @@ class BidChanges(generics.ListAPIView, generics.UpdateAPIView, generics.DestroyA
         instance = generics.get_object_or_404(BidSerializer, advertisement=kwargs['id'])
         instance.delete()
         return empty_response()
+

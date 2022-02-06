@@ -45,3 +45,11 @@ class SubCategoryView(generics.RetrieveAPIView):
         return success_response(serializer.data)
 
 
+
+
+
+
+
+
+
+

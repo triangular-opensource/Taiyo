@@ -8,4 +8,7 @@ urlpatterns = [
     path("product/<int:id>", ProductCategoryView.as_view(), name="product-by-sub-category"),
     ##extra
     path("product", ProductView.as_view(), name="product"),
+
+
+
 ]

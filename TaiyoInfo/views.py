@@ -10,6 +10,8 @@ from services.response import success_response, bad_request_response
 from services.mailing import *
 
 
+
+
 from TaiyoInfo.models import GeneralInfo, NewsLetter, Addres , Policy, Subscription , Contact
 
 
@@ -90,14 +92,6 @@ class SubscriptionView(generics.RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(Subscription.objects.all(), many=True)
         return success_response(serializer.data)
-
-
-@permission_classes((AllowAny,))
-class AllView(generics.RetrieveAPIView):
-    def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(Subscription.objects.all(), many=True)
-        return success_response(serializer.data)
-
 
 
 
