@@ -42,7 +42,7 @@ class AdvertismentView(generics.RetrieveAPIView):
             serializer1 = self.get_serializer(Advertisement.objects.filter(visible = True , product__name__icontains = query ).order_by("-id"), many=True)
             serializer2 = self.get_serializer(Advertisement.objects.filter(visible=True, product__sub_category__name__icontains=query ).order_by("-id"), many=True)
             serializer3 = self.get_serializer(Advertisement.objects.filter(visible=True, product__sub_category__category__name__icontains=query ).order_by("-id"), many=True)
-            serializer = serializer1 | serializer2 | serializer3
+            serializer = serializer1.union(serializer2,serializer3)
         else:
             serializer = self.get_serializer(Advertisement.objects.all().order_by("-id"), many=True)
         return success_response(serializer.data)
