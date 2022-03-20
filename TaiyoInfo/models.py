@@ -34,7 +34,7 @@ class GeneralInfo(models.Model):
     cover_image = models.FileField(null=True)
     cover_image_link = models.URLField(max_length=200, null=True, blank=True)
     intro = models.TextField(blank=True)
-    about = models.TextField(blank=True)
+    about = RichTextField(null=False , blank = True)
     email = models.EmailField(max_length=50, null=True, validators=[validate_email_id])
     phone_number = models.CharField(max_length=10, null=True, validators=[validate_phone_number])
     twitter = models.URLField(max_length=200, null=True, blank=True)
