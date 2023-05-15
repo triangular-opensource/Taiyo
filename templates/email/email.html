@@ -1,0 +1,22 @@
+<div style="margin-left: 10%; background-color:#000000; padding: 20px; width: 720px; border-radius: 2%; margin-bottom: 20px;">
+	<div style="color: rgb(255, 255, 255); text-align: center; font-size: 22px;font-weight: bold;  margin-bottom: 20px;">
+		Taiyo : NewsLetter
+	</div>
+</div>
+	{% for i in data %}
+		<a style="text-decoration: none;" href="{{ i.url }}">
+			<div style="margin-left:20%;margin-top: 20px; padding-bottom:10px; width: 520px; border: 2px none; border-radius: 2%; background-color: rgb(77, 77, 77);box-shadow: 1px 1px 11px 0px #423b3b;">
+				<div style="display: flex; justify-content: center; align-items: center;">
+					<div>
+						<div style="display: flex; justify-content: center; align-items: center;">
+							<img style="height: 200px; width: 520px; border-radius: 2%;" src="{{ i.urlToImage }}" alt="image">
+						</div>
+						<div style="color: #ffffff;padding-left: 40px; padding-right: 40px;">
+							<h1>{{ i.title }}</h1>
+							<p>{{ i.description }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+	{% endfor %}
