@@ -7,6 +7,7 @@ admin.site.unregister((DjangoJob, DjangoJobExecution, Group))
 
 
 
+
 @admin.register(GeneralInfo)
 class GeneralInfoAdmin(admin.ModelAdmin):
 
