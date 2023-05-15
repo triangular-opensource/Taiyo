@@ -112,7 +112,11 @@ WSGI_APPLICATION = 'Taiyo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'sql12618402',
+        'USER': 'sql12618402',
+        'PASSWORD': 'pN68114i2s',
+        'HOST': 'sql12.freesqldatabase.com',
+        'PORT': '3306',
     }
 }
 
@@ -187,6 +191,3 @@ FRONTEND_URL = "https://taiyoindustries.com"
 # FRONTEND_URL = "http://localhost:3000"
 
 MANAGERS = [("Manoj Mishra", "taiyo.apex@gmail.com"),]
-
-
-django_heroku.settings(locals())
