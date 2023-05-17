@@ -6,7 +6,7 @@ chardet==4.0.0
 charset-normalizer==2.0.12
 dj-database-url==0.5.0
 Django==3.2.3
-django-apscheduler
+django-apscheduler==0.6.0
 django-ckeditor==5.9.0
 django-cors-headers==3.7.0
 django-crum==0.7.9
@@ -16,7 +16,7 @@ django-suit==2.0a1
 djangorestframework==3.12.4
 idna==2.10
 importlib-resources==5.4.0
-Pillow
+Pillow==8.2.0
 pytz==2021.1
 pytz-deprecation-shim==0.1.0.post0
 razorpay==1.2.0
