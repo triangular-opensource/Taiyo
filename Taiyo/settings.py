@@ -111,11 +111,7 @@ WSGI_APPLICATION = 'Taiyo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'sql12618402',
-        'USER': 'sql12618402',
-        'PASSWORD': 'pN68114i2s',
-        'HOST': 'sql12.freesqldatabase.com',
-        'PORT': '3306',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
