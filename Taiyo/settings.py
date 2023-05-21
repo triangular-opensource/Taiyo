@@ -111,7 +111,7 @@ WSGI_APPLICATION = 'Taiyo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Taiyo',
+        'NAME': 'taiyo',
         'USER': 'Manoj',
         'PASSWORD': 'ManojMishra123',
         'HOST': 'localhost',
