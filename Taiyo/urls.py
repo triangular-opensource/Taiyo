@@ -19,7 +19,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls.conf import include
 from TaiyoInfo.views import admin_redirect
-
 from user.views import activate_user
 
 urlpatterns = [
@@ -32,12 +31,8 @@ urlpatterns = [
     path("api/auth/", include("user.urls")),
     path('activate-user/<uidb64>/<token>', activate_user, name="activate"),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL,
-                          document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = "Taiyo"
 admin.site.site_title = "Taiyo"
